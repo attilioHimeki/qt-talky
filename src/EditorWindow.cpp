@@ -11,16 +11,19 @@
 #include <QJsonDocument>
 #include <QSettings>
 
+#include <QDebug>
+
 EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags)
 {
     setObjectName("MainWindow");
 
     setMinimumSize(500, 500);
 
+    changeLanguage(defaultLanguage);
+
     graphWidget = new GraphWidget(this);
 
-    connect(graphWidget, &GraphWidget::contentChanged,
-                this, &EditorWindow::markFileDirty);
+    connect(graphWidget, &GraphWidget::contentChanged, this, &EditorWindow::markFileDirty);
 
     hasUnsavedChanges = false;
 
@@ -34,6 +37,9 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
     setWindowTitle(QCoreApplication::applicationName());
 
     loadViewSetup();
+
+    settingsDialog = new SettingsDialog(this);
+    connect(settingsDialog, &SettingsDialog::languageChanged, this, &EditorWindow::changeLanguage);
 }
 
 void EditorWindow::setupToolBar()
@@ -64,11 +70,11 @@ void EditorWindow::setupMenuBar()
     editMenu = menuBar()->addMenu(tr("Edit"));
 
     aboutMenu = menuBar()->addMenu(tr("About"));
-    QAction *aboutAct = aboutMenu->addAction(tr("&About"), this, &EditorWindow::aboutTalky);
-    aboutAct->setStatusTip(tr("Show the application's About box"));
+    aboutMenu->addAction(tr("About"), this, &EditorWindow::aboutTalky);
+    aboutMenu->addAction(tr("About &Qt"), qApp, &QApplication::aboutQt);
 
-    QAction *aboutQtAct = aboutMenu->addAction(tr("About &Qt"), qApp, &QApplication::aboutQt);
-    aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
+    QAction *actionOpenPrefs = aboutMenu->addAction(tr("Preferences"), this, &EditorWindow::openSettings);
+    actionOpenPrefs->setShortcut(QKeySequence::Preferences);
 }
 
 bool EditorWindow::loadFile()
@@ -151,7 +157,7 @@ bool EditorWindow::saveFileAsNew()
 {
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
-    QString fileName = dialog.getSaveFileName(this, tr("Create New File"),"",tr("JSON (*.json)"));
+    QString fileName = dialog.getSaveFileName(this, tr("Create New File"),"","JSON (*.json)");
 
     currentOpenedFilePath = fileName;
 
@@ -261,4 +267,27 @@ void EditorWindow::aboutTalky()
                 tr("<b>Talky</b> is a node based editor "
                    "to design dialogues and character interactions "
                    "for games."));
+}
+
+void EditorWindow::openSettings()
+{
+    settingsDialog->open();
+}
+
+void EditorWindow::changeLanguage(const QString& languageCode)
+{
+    qApp->removeTranslator(&translator);
+
+    QString resourceFileName = QString(":/languages/talky_%1.qm").arg(languageCode);
+
+    if (translator.load(resourceFileName))
+    {
+         qApp->installTranslator(&translator);
+
+         currentLanguageCode = languageCode;
+    }
+    else
+    {
+        qWarning() << QString("Couldn't find translation file for language %1.").arg(languageCode);
+    }
 }

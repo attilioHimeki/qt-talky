@@ -11,10 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = talky
 TEMPLATE = app
 
-# The following define makes your compiler emit warnings if you use
-# any feature of Qt which has been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
 # You can also make your code fail to compile if you use deprecated APIs.
@@ -24,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++14
 QMAKE_CXXFLAGS += -std=c++14
+
 
 HEADERS += \
     src/NodeView.h \
@@ -45,7 +42,10 @@ HEADERS += \
     src/ChoiceNode.h \
     src/ChoiceNodeEntry.h \
     src/ChoiceNodeView.h \
-    src/ChoiceNodeData.h
+    src/ChoiceNodeData.h \
+    src/SettingsDialog.h \
+    src/SettingsGeneralTab.h \
+    src/SettingsLanguageTab.h
 
 SOURCES += \
     src/main.cpp \
@@ -67,7 +67,16 @@ SOURCES += \
     src/ChoiceNode.cpp \
     src/ChoiceNodeEntry.cpp \
     src/ChoiceNodeView.cpp \
-    src/ChoiceNodeData.cpp
+    src/ChoiceNodeData.cpp \
+    src/SettingsDialog.cpp \
+    src/SettingsGeneralTab.cpp \
+    src/SettingsLanguageTab.cpp
+
+TRANSLATIONS += res/languages/talky_en.ts \
+                res/languages/talky_it.ts \
+
+OTHER_FILES += res/languages/talky_en.ts \
+                res/languages/talky_it.ts \
 
 FORMS +=
 
@@ -75,3 +84,6 @@ FORMS +=
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    res/resources.qrc

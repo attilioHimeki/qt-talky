@@ -5,7 +5,7 @@
 
 enum class NodeType {None, Origin, Dialogue, Pause, Action, Choice};
 
-inline NodeType getNodeTypeFromString(QString typeString)
+inline NodeType getNodeTypeFromString(const QString& typeString)
 {
     if(typeString == "none")
     {

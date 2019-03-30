@@ -7,6 +7,7 @@
 
 int main(int argc, char **argv)
 {
+
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
@@ -15,6 +16,8 @@ int main(int argc, char **argv)
     QCoreApplication::setApplicationName("Talky");
 
     QApplication app(argc, argv);
+
+    Q_INIT_RESOURCE(resources);
 
     EditorWindow mainWindow;
 

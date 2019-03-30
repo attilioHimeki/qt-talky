@@ -195,7 +195,7 @@ void GraphWidget::showDefaultContextMenu(const QPoint& pos)
 {
     auto clickPos = mapToGlobal(pos);
     QMenu menu(this);
-    auto submenu = menu.addMenu("New Node");
+    auto submenu = menu.addMenu(tr("New Node"));
 
     QAction* addDialogueNodeAction = submenu->addAction(tr("Dialogue Node"), this, &GraphWidget::spawnDialogueNode);
     addDialogueNodeAction->setStatusTip(tr("Create a new dialogue node"));

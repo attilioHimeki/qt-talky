@@ -2,8 +2,10 @@
 #define EDITORWINDOW_H
 
 #include "GraphWidget.h"
+#include "SettingsDialog.h"
 
 #include <QMainWindow>
+#include <QTranslator>
 
 class EditorWindow : public QMainWindow
 {
@@ -18,12 +20,13 @@ protected:
     void closeEvent(QCloseEvent* event) override;
 
 private:
+    const QString defaultLanguage = "en";
+
     void setupToolBar();
     void setupMenuBar();
 
     void loadViewSetup();
     void saveViewSetup();
-
     bool hasOpenedSaveFile();
 
     QMenu *fileMenu;
@@ -34,16 +37,23 @@ private:
     QString currentOpenedFilePath;
     bool hasUnsavedChanges;
 
+    SettingsDialog* settingsDialog;
+
+    QTranslator translator;
+    QString currentLanguageCode;
+
 private slots:
     bool loadFile();
     bool saveFile();
     bool saveFileAsNew();
     bool maybeSave();
     void aboutTalky();
+    void openSettings();
 
 public slots:
     void markFileDirty();
     void markFileNonDirty();
+    void changeLanguage(const QString& languageCode);
 };
 
 #endif // EDITORWINDOW_H
