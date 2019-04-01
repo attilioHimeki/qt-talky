@@ -19,8 +19,6 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
 
     setMinimumSize(500, 500);
 
-    changeLanguage(defaultLanguage);
-
     graphWidget = new GraphWidget(this);
 
     connect(graphWidget, &GraphWidget::contentChanged, this, &EditorWindow::markFileDirty);
@@ -31,15 +29,13 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
 
     setupToolBar();
     setupMenuBar();
+    setupSettingsDialog();
 
     statusBar()->showMessage(tr("Status Bar"));
 
     setWindowTitle(QCoreApplication::applicationName());
 
     loadViewSetup();
-
-    settingsDialog = new SettingsDialog(this);
-    connect(settingsDialog, &SettingsDialog::languageChanged, this, &EditorWindow::changeLanguage);
 }
 
 void EditorWindow::setupToolBar()
@@ -75,6 +71,13 @@ void EditorWindow::setupMenuBar()
 
     QAction *actionOpenPrefs = aboutMenu->addAction(tr("Preferences"), this, &EditorWindow::openSettings);
     actionOpenPrefs->setShortcut(QKeySequence::Preferences);
+}
+
+void EditorWindow::setupSettingsDialog()
+{
+    settingsDialog = new SettingsDialog(this);
+    connect(settingsDialog, &SettingsDialog::languageChanged, this, &EditorWindow::changeLanguage);
+    connect(this, &EditorWindow::appLanguageChanged, settingsDialog, &SettingsDialog::retranslate);
 }
 
 bool EditorWindow::loadFile()
@@ -285,6 +288,8 @@ void EditorWindow::changeLanguage(const QString& languageCode)
          qApp->installTranslator(&translator);
 
          currentLanguageCode = languageCode;
+
+         emit appLanguageChanged(languageCode);
     }
     else
     {

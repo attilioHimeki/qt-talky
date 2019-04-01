@@ -31,3 +31,11 @@ SettingsDialog::SettingsDialog(QWidget *parent)
 
     setWindowTitle(tr("Preferences"));
 }
+
+void SettingsDialog::retranslate()
+{
+    tabWidget->setTabText(0, tr("General"));
+    tabWidget->setTabText(1, tr("Language"));
+
+    setWindowTitle(tr("Preferences"));
+}

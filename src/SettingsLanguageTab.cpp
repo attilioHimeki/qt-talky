@@ -11,15 +11,7 @@ SettingsLanguageTab::SettingsLanguageTab(QWidget *parent)
     : QWidget(parent)
 {
     QGridLayout *grid = new QGridLayout;
-    grid->addWidget(createLanguagesGroup(), 0, 0);
-    setLayout(grid);
-
-    resize(480, 320);
-}
-
-QGroupBox* SettingsLanguageTab::createLanguagesGroup()
-{
-    QGroupBox* groupBox = new QGroupBox(tr("Choose Language"));
+    languagesGroupBox = new QGroupBox(tr("Choose Language"));
 
     QRadioButton *enRadioButton = new QRadioButton("English");
     QRadioButton *itRadioButton = new QRadioButton("Italian");
@@ -36,9 +28,10 @@ QGroupBox* SettingsLanguageTab::createLanguagesGroup()
     vbox->addWidget(itRadioButton);
     vbox->addWidget(ptRadioButton);
     vbox->addStretch(1);
-    groupBox->setLayout(vbox);
+    languagesGroupBox->setLayout(vbox);
 
-    return groupBox;
+    grid->addWidget(languagesGroupBox, 0, 0);
+    setLayout(grid);
 }
 
 void SettingsLanguageTab::onEnglishLanguageToggled(bool checked)

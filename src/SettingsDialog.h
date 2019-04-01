@@ -15,6 +15,9 @@ private:
     QTabWidget *tabWidget;
     QDialogButtonBox *buttonBox;
 
+public slots:
+    void retranslate();
+
 signals:
     void languageChanged(const QString& langCode);
 };

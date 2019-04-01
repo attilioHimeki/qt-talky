@@ -24,6 +24,7 @@ private:
 
     void setupToolBar();
     void setupMenuBar();
+    void setupSettingsDialog();
 
     void loadViewSetup();
     void saveViewSetup();
@@ -54,6 +55,9 @@ public slots:
     void markFileDirty();
     void markFileNonDirty();
     void changeLanguage(const QString& languageCode);
+
+signals:
+    void appLanguageChanged(const QString& langCode);
 };
 
 #endif // EDITORWINDOW_H

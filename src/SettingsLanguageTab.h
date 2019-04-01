@@ -12,7 +12,7 @@ public:
     explicit SettingsLanguageTab(QWidget *parent = 0);
 
 private:
-    QGroupBox* createLanguagesGroup();
+    QGroupBox* languagesGroupBox;
 
 private slots:
     void onEnglishLanguageToggled(bool checked);
