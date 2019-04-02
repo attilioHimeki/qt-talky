@@ -22,9 +22,9 @@ void DialogueNodeData::write(QJsonObject &json) const
     NodeData::write(json);
 }
 
-void DialogueNodeData::read(const QJsonObject &json)
+void DialogueNodeData::read(const QJsonObject &json, bool readId)
 {
     textKey = json["textKey"].toString();
 
-    NodeData::read(json);
+    NodeData::read(json, readId);
 }

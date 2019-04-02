@@ -17,6 +17,18 @@ Node* DialogueTree::createOriginNode()
     return originNode;
 }
 
+Node* DialogueTree::cloneNode(const Node &node)
+{
+    QJsonObject nodeObject;
+    node.write(nodeObject);
+    auto clone = NodeBuilder::create(nodeObject, nextNodeId++);
+    nodes.append(clone);
+
+    emit contentChanged();
+
+    return clone;
+}
+
 Node* DialogueTree::getNodeById(int nodeId) const
 {
     for(Node* n : nodes)
@@ -30,11 +42,18 @@ Node* DialogueTree::getNodeById(int nodeId) const
     return Q_NULLPTR;
 }
 
-void DialogueTree::addNodeLink(Node* startNode, Node* endNode)
+bool DialogueTree::addNodeLink(Node* startNode, Node* endNode)
 {
-    startNode->addLinkedNode(endNode->getNodeId());
+    if(startNode->validateAddNode(*endNode))
+    {
+        startNode->addLinkedNode(endNode->getNodeId());
 
-    emit contentChanged();
+        emit linkAdded(startNode, endNode);
+        emit contentChanged();
+
+        return true;
+    }
+    return false;
 }
 
 void DialogueTree::write(QJsonObject &json) const

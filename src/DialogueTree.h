@@ -21,14 +21,16 @@ public:
     Node* createDialogueNode();
     Node* createOriginNode();
     Node* createChoiceNode();
+    Node* cloneNode(const Node& node);
 
-    void addNodeLink(Node* startNode, Node* endNode);
+    bool addNodeLink(Node* startNode, Node* endNode);
     void deleteNode(Node* node);
     void clearTree();
     QList<Node*> nodes;
 
 signals:
     void contentChanged();
+    void linkAdded(Node* startNode, Node* endNode);
 
 private:
     QString treeName;

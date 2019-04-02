@@ -12,6 +12,8 @@ public:
 
     void setupView(GraphWidget *graphWidget) override;
 
+    bool validateAddNode(const Node& linkedNode) const override;
+
 private:
     QList<ChoiceNodeEntry*> choices;
 

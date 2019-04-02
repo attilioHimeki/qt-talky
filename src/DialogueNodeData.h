@@ -11,7 +11,7 @@ public:
     const QString getNodeTextKey() const;
     void setNodeTextKey(const QString key);
 
-    void read(const QJsonObject &json) override;
+    void read(const QJsonObject &json, bool readId = false) override;
     void write(QJsonObject &json) const override;
 
 private:

@@ -25,12 +25,15 @@ void NodeData::write(QJsonObject &json) const
 
 }
 
-void NodeData::read(const QJsonObject &json)
+void NodeData::read(const QJsonObject &json, bool readId)
 {
     auto nodeTypeString = json["nodeType"].toString();
     type = getNodeTypeFromString(nodeTypeString);
 
-    nodeId = json["nodeId"].toInt();
+    if(readId)
+    {
+        nodeId = json["nodeId"].toInt();
+    }
 
     auto startX = json["x"].toInt();
     auto startY = json["y"].toInt();

@@ -23,24 +23,29 @@ Node* NodeBuilder::create(NodeType type, int id)
     }
 }
 
-Node* NodeBuilder::create(QJsonObject json)
+Node* NodeBuilder::create(QJsonObject json, int id)
 {
     auto nodeTypeString = json["nodeType"].toString();
     auto type = getNodeTypeFromString(nodeTypeString);
+
+    if(id == -1)
+    {
+        id = json["nodeId"].toInt();
+    }
 
     switch(type)
     {
         case NodeType::Dialogue:
         {
-            return createDialogueNode(json);
+            return createDialogueNode(json, id);
         }
         case NodeType::Origin:
         {
-            return createOriginNode(json);
+            return createOriginNode(json, id);
         }
         default:
         {
-            return createOriginNode(json);
+            return createOriginNode(json, id);
         }
     }
 }
@@ -52,9 +57,8 @@ DialogueNode* NodeBuilder::createDialogueNode(int id)
     return node;
 }
 
-DialogueNode* NodeBuilder::createDialogueNode(QJsonObject json)
+DialogueNode* NodeBuilder::createDialogueNode(QJsonObject json, int id)
 {
-    auto id = json["nodeId"].toInt();
     DialogueNodeData* nodeData = new DialogueNodeData(id);
     nodeData->read(json);
 
@@ -69,9 +73,8 @@ OriginNode* NodeBuilder::createOriginNode(int id)
     return node;
 }
 
-OriginNode* NodeBuilder::createOriginNode(QJsonObject json)
+OriginNode* NodeBuilder::createOriginNode(QJsonObject json, int id)
 {
-    auto id = json["nodeId"].toInt();
     NodeData* nodeData = new NodeData(NodeType::Origin, id);
     nodeData->read(json);
 
@@ -86,9 +89,8 @@ ChoiceNode* NodeBuilder::createChoiceNode(int id)
     return node;
 }
 
-ChoiceNode* NodeBuilder::createChoiceNode(QJsonObject json)
+ChoiceNode* NodeBuilder::createChoiceNode(QJsonObject json, int id)
 {
-    auto id = json["nodeId"].toInt();
     NodeData* nodeData = new NodeData(NodeType::Choice, id);
     nodeData->read(json);
 

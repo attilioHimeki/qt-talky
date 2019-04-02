@@ -22,3 +22,8 @@ void ChoiceNode::removeChoiceEntry(int index)
 {
 
 }
+
+bool ChoiceNode::validateAddNode(const Node& linkedNode) const
+{
+    return true;
+}

@@ -52,6 +52,11 @@ int Node::getNodeId() const
     return model->getNodeId();
 }
 
+NodeType Node::getNodeType() const
+{
+    return model->type;
+}
+
 const QPoint Node::getStartPosition() const
 {
     return model->startPos;

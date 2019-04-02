@@ -11,6 +11,8 @@ public:
     ~OriginNode() override = default;
 
     void setupView(GraphWidget *graphWidget) override;
+
+    bool validateAddNode(const Node& linkedNode) const override;
 };
 
 #endif // ORIGINNODE_H

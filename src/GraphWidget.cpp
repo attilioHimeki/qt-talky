@@ -10,6 +10,7 @@
 
 #include <QKeyEvent>
 #include <QDebug>
+#include <QMessageBox>
 
 GraphWidget::GraphWidget(QWidget *parent)
     : QGraphicsView(parent)
@@ -28,11 +29,12 @@ GraphWidget::GraphWidget(QWidget *parent)
     setBackgroundBrush(Qt::white);
 
     setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this, SIGNAL(customContextMenuRequested(const QPoint&)),
-                SLOT(showContextMenu(const QPoint& )));
+    connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), SLOT(showContextMenu(const QPoint& )));
 
     currentTree = std::make_unique<DialogueTree>();
     connect(currentTree.get(), &DialogueTree::contentChanged, this, &GraphWidget::contentChanged);
+    connect(currentTree.get(), &DialogueTree::linkAdded, this, &GraphWidget::processAddLink);
+
     auto origin = currentTree->createOriginNode();
     processAddNode(origin);
 
@@ -75,9 +77,7 @@ void GraphWidget::onNodeDeleteRequest(Node* node)
 
 void GraphWidget::onNodeCloneRequest(Node* node)
 {
-    QJsonObject nodeObject;
-    node->write(nodeObject);
-    auto clone = NodeBuilder::create(nodeObject);
+    auto clone = currentTree->cloneNode(*node);
     processAddNode(clone);
 }
 
@@ -278,8 +278,11 @@ void GraphWidget::mousePressEvent(QMouseEvent * event)
            auto nodeView = dynamic_cast<NodeView*>(item);
            if(nodeView != Q_NULLPTR)
            {
-               currentTree->addNodeLink(currentTransitionNode, nodeView->getOwner());
-               processAddLink(currentTransitionNode, nodeView->getOwner());
+               bool success = currentTree->addNodeLink(currentTransitionNode, nodeView->getOwner());
+               if(!success)
+               {
+                   QMessageBox::warning(this, tr("Error linking nodes"), tr("This link is not allowed"));
+               }
            }
         }
 

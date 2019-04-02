@@ -20,6 +20,7 @@ public:
     void write(QJsonObject &json) const;
 
     int getNodeId() const;
+    NodeType getNodeType() const;
 
     virtual void setupView(GraphWidget *graphWidget) = 0;
     NodeView* getView();
@@ -27,6 +28,7 @@ public:
     QList<NodeLink*> getLinkedNodes() const;
     void addLinkedNode(int linkedNodeId);
     void removeLinkedNode(int linkedNodeId);
+    virtual bool validateAddNode(const Node& linkedNode) const = 0;
 
     const QPoint getStartPosition() const;
 

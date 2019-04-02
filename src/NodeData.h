@@ -14,7 +14,7 @@ public:
     NodeData(NodeType t, int id);
     virtual ~NodeData() = default;
 
-    virtual void read(const QJsonObject &json);
+    virtual void read(const QJsonObject &json, bool readId = false);
     virtual void write(QJsonObject &json) const;
 
     int getNodeId() const;
