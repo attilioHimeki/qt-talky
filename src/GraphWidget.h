@@ -6,6 +6,7 @@
 #include "DialogueTree.h"
 
 class NodeView;
+class MouseLinkView;
 
 class GraphWidget : public QGraphicsView
 {
@@ -46,6 +47,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void showEvent(QShowEvent *) override;
     void mousePressEvent(QMouseEvent * e) override;
+    void mouseMoveEvent(QMouseEvent * e) override;
     void scaleView(qreal scaleFactor);
     void translateView(qreal x, qreal y);
 private:
@@ -55,8 +57,13 @@ private:
 
     bool isAddingTransition = false;
     Node* currentTransitionNode;
+    MouseLinkView* transitionLinkView;
 
     QList<NodeLinkView*> nodeLinks;
+
+    void initialiseTransitionIndicator();
+    void startAddTransition(Node* fromNode);
+    void clearAddTransition();
 };
 
 

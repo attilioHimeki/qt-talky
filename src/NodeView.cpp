@@ -75,7 +75,7 @@ QPointF NodeView::getEdgesOutputPoint() const
     return QPointF(nodePosition.x() + nodeWidth/2, nodePosition.y());
 }
 
-void NodeView::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
+void NodeView::paint(QPainter *painter, const QStyleOptionGraphicsItem* /*option*/, QWidget *)
 {
     painter->setPen(QPen(Qt::black, 1));
     painter->drawRoundRect(-nodeWidth/2, -nodeHeight/2, nodeWidth, nodeHeight, 5, 5);

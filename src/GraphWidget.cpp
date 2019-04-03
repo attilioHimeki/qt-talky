@@ -1,5 +1,6 @@
 #include "GraphWidget.h"
 #include "NodeLinkView.h"
+#include "MouseLinkView.h"
 #include "NodeView.h"
 #include "Node.h"
 #include "DialogueTree.h"
@@ -38,8 +39,14 @@ GraphWidget::GraphWidget(QWidget *parent)
     auto origin = currentTree->createOriginNode();
     processAddNode(origin);
 
-    currentTransitionNode = Q_NULLPTR;
-    isAddingTransition = false;
+    initialiseTransitionIndicator();
+}
+
+void GraphWidget::initialiseTransitionIndicator()
+{
+    transitionLinkView = new MouseLinkView(this);
+    graphScene->addItem(transitionLinkView);
+    transitionLinkView->setVisible(false);
 }
 
 void GraphWidget::refreshGraph() const
@@ -83,8 +90,25 @@ void GraphWidget::onNodeCloneRequest(Node* node)
 
 void GraphWidget::onNodeAddTransitionRequest(Node* node)
 {
+    startAddTransition(node);
+}
+
+void GraphWidget::startAddTransition(Node* fromNode)
+{
     isAddingTransition = true;
-    currentTransitionNode = node;
+    currentTransitionNode = fromNode;
+
+    transitionLinkView->setVisible(true);
+    transitionLinkView->setSource(fromNode->getView());
+}
+
+void GraphWidget::clearAddTransition()
+{
+    isAddingTransition = false;
+    currentTransitionNode = Q_NULLPTR;
+
+    transitionLinkView->setVisible(false);
+    transitionLinkView->setSource(Q_NULLPTR);
 }
 
 
@@ -102,6 +126,7 @@ void GraphWidget::onNodeMoved(Node* node)
 
 void GraphWidget::applyLoadedTreeJsonFile(QJsonObject& treeFileJson)
 {
+    clearAddTransition();
     currentTree->read(treeFileJson);
 
     auto nodes = currentTree->nodes;
@@ -119,7 +144,7 @@ void GraphWidget::applyLoadedTreeJsonFile(QJsonObject& treeFileJson)
             auto linkedNode = currentTree->getNodeById(l->getLinkedNodeId());
             if(linkedNode != Q_NULLPTR)
             {
-                auto nodeLinkView = new NodeLinkView(*n->getView(), *linkedNode->getView());
+                auto nodeLinkView = new NodeLinkView(this, *n->getView(), *linkedNode->getView());
                 nodeLinks.push_back(nodeLinkView);
             }
         }
@@ -184,7 +209,7 @@ void GraphWidget::processAddNode(Node* node)
 
 void GraphWidget::processAddLink(Node* outputNode, Node* inputNode)
 {
-    auto nodeLinkView = new NodeLinkView(*outputNode->getView(), *inputNode->getView());
+    auto nodeLinkView = new NodeLinkView(this, *outputNode->getView(), *inputNode->getView());
     nodeLinks.push_back(nodeLinkView);
 
     graphScene->addItem(nodeLinkView);
@@ -286,11 +311,20 @@ void GraphWidget::mousePressEvent(QMouseEvent * event)
            }
         }
 
-        isAddingTransition = false;
-        currentTransitionNode = Q_NULLPTR;
+        clearAddTransition();
     }
 
     QGraphicsView::mousePressEvent(event);
+}
+
+void GraphWidget::mouseMoveEvent(QMouseEvent * event)
+{
+    if(isAddingTransition)
+    {
+        transitionLinkView->adjust();
+    }
+
+    QGraphicsView::mouseMoveEvent(event);
 }
 
 void GraphWidget::zoomIn()

@@ -1,32 +1,23 @@
 #ifndef NODELINKVIEW_H
 #define NODELINKVIEW_H
 
-#include <QGraphicsItem>
+#include "LinkView.h"
 
 class NodeView;
 
-class NodeLinkView : public QGraphicsItem
+class NodeLinkView : public LinkView
 {
 public:
-    NodeLinkView(const NodeView& sourceNode, const NodeView& destNode);
+    NodeLinkView(GraphWidget *graphWidget, const NodeView& sourceNode, const NodeView& destNode);
 
     enum { Type = UserType + 1 };
     int type() const override { return Type; }
 
-    void adjust();
+    void adjust() override;
 
     bool isLinkedWith(NodeView& node) const;
 
-protected:
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-
 private:
-    const qreal arrowSize = 10;
-
-    QPointF sourcePoint;
-    QPointF destPoint;
-
     const NodeView& source;
     const NodeView& destination;
 };

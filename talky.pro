@@ -45,7 +45,9 @@ HEADERS += \
     src/ChoiceNodeData.h \
     src/SettingsDialog.h \
     src/SettingsGeneralTab.h \
-    src/SettingsLanguageTab.h
+    src/SettingsLanguageTab.h \
+    src/MouseLinkView.h \
+    src/LinkView.h
 
 SOURCES += \
     src/main.cpp \
@@ -70,7 +72,9 @@ SOURCES += \
     src/ChoiceNodeData.cpp \
     src/SettingsDialog.cpp \
     src/SettingsGeneralTab.cpp \
-    src/SettingsLanguageTab.cpp
+    src/SettingsLanguageTab.cpp \
+    src/MouseLinkView.cpp \
+    src/LinkView.cpp
 
 TRANSLATIONS += res/languages/talky_en.ts \
                 res/languages/talky_it.ts \
