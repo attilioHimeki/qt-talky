@@ -9,8 +9,6 @@ LinkView::LinkView(GraphWidget *graphWidget)
 {
     setAcceptedMouseButtons(Q_NULLPTR);
 
-    setFlag(ItemSendsGeometryChanges);
-    setCacheMode(DeviceCoordinateCache);
     setZValue(-1);
 }
 

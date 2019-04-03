@@ -10,7 +10,6 @@
 #include <typeinfo>
 
 #include <QKeyEvent>
-#include <QDebug>
 #include <QMessageBox>
 
 GraphWidget::GraphWidget(QWidget *parent)
@@ -30,16 +29,21 @@ GraphWidget::GraphWidget(QWidget *parent)
     setBackgroundBrush(Qt::white);
 
     setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), SLOT(showContextMenu(const QPoint& )));
+    connect(this, &QWidget::customContextMenuRequested, this, &GraphWidget::showContextMenu);
 
     currentTree = std::make_unique<DialogueTree>();
-    connect(currentTree.get(), &DialogueTree::contentChanged, this, &GraphWidget::contentChanged);
-    connect(currentTree.get(), &DialogueTree::linkAdded, this, &GraphWidget::processAddLink);
+    connectTreeSignals();
 
     auto origin = currentTree->createOriginNode();
     processAddNode(origin);
 
     initialiseTransitionIndicator();
+}
+
+void GraphWidget::connectTreeSignals()
+{
+    connect(currentTree.get(), &DialogueTree::contentChanged, this, &GraphWidget::contentChanged);
+    connect(currentTree.get(), &DialogueTree::linkAdded, this, &GraphWidget::processAddLink);
 }
 
 void GraphWidget::initialiseTransitionIndicator()
@@ -49,7 +53,7 @@ void GraphWidget::initialiseTransitionIndicator()
     transitionLinkView->setVisible(false);
 }
 
-void GraphWidget::refreshGraph() const
+void GraphWidget::refreshGraph()
 {
     graphScene->clear();
 
@@ -64,6 +68,8 @@ void GraphWidget::refreshGraph() const
     {
         graphScene->addItem(n);
     }
+
+    initialiseTransitionIndicator();
 }
 
 void GraphWidget::onNodeDeleteRequest(Node* node)
@@ -95,11 +101,12 @@ void GraphWidget::onNodeAddTransitionRequest(Node* node)
 
 void GraphWidget::startAddTransition(Node* fromNode)
 {
-    isAddingTransition = true;
-    currentTransitionNode = fromNode;
+    transitionLinkView->setSource(fromNode->getView());
 
     transitionLinkView->setVisible(true);
-    transitionLinkView->setSource(fromNode->getView());
+
+    isAddingTransition = true;
+    currentTransitionNode = fromNode;
 }
 
 void GraphWidget::clearAddTransition()
@@ -129,6 +136,8 @@ void GraphWidget::applyLoadedTreeJsonFile(QJsonObject& treeFileJson)
     clearAddTransition();
     currentTree->read(treeFileJson);
 
+    nodeLinks.clear();
+
     auto nodes = currentTree->nodes;
     for(Node* n : nodes)
     {
@@ -151,6 +160,7 @@ void GraphWidget::applyLoadedTreeJsonFile(QJsonObject& treeFileJson)
     }
 
     refreshGraph();
+    connectTreeSignals();
 }
 
 const QJsonObject GraphWidget:: serialiseLoadedTree()

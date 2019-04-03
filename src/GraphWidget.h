@@ -20,11 +20,12 @@ public:
     const QJsonObject serialiseLoadedTree();
     void processAddNode(Node* node);
     void processAddLink(Node* inputNode, Node* outputNode);
+    void connectTreeSignals();
 
     void spawnDialogueNode();
     void spawnChoiceNode();
 
-    void refreshGraph() const;
+    void refreshGraph();
 
 signals:
     void contentChanged();
