@@ -12,6 +12,7 @@ Node* DialogueTree::createOriginNode()
     originNode = node;
     nodes.append(node);
 
+    emit nodeAdded(node);
     emit contentChanged();
 
     return originNode;
@@ -24,6 +25,7 @@ Node* DialogueTree::cloneNode(const Node &node)
     auto clone = NodeBuilder::create(nodeObject, nextNodeId++);
     nodes.append(clone);
 
+    emit nodeAdded(clone);
     emit contentChanged();
 
     return clone;
@@ -104,6 +106,7 @@ Node* DialogueTree::createDialogueNode()
     nodes.append(node);
     connect(node, &Node::nodeChanged, this, &DialogueTree::contentChanged);
 
+    emit nodeAdded(node);
     emit contentChanged();
 
     return node;
@@ -115,6 +118,7 @@ Node* DialogueTree::createChoiceNode()
     nodes.append(node);
     connect(node, &Node::nodeChanged, this, &DialogueTree::contentChanged);
 
+    emit nodeAdded(node);
     emit contentChanged();
 
     return node;

@@ -17,6 +17,7 @@ public:
 
     void itemMoved();
     void applyLoadedTreeJsonFile(QJsonObject& treeFileJson);
+    void applyNewTree();
     const QJsonObject serialiseLoadedTree();
     void processAddNode(Node* node);
     void processAddLink(Node* inputNode, Node* outputNode);

@@ -34,8 +34,7 @@ GraphWidget::GraphWidget(QWidget *parent)
     currentTree = std::make_unique<DialogueTree>();
     connectTreeSignals();
 
-    auto origin = currentTree->createOriginNode();
-    processAddNode(origin);
+    currentTree->createOriginNode();
 
     initialiseTransitionIndicator();
 }
@@ -44,6 +43,7 @@ void GraphWidget::connectTreeSignals()
 {
     connect(currentTree.get(), &DialogueTree::contentChanged, this, &GraphWidget::contentChanged);
     connect(currentTree.get(), &DialogueTree::linkAdded, this, &GraphWidget::processAddLink);
+    connect(currentTree.get(), &DialogueTree::nodeAdded, this, &GraphWidget::processAddNode);
 }
 
 void GraphWidget::initialiseTransitionIndicator()
@@ -90,8 +90,7 @@ void GraphWidget::onNodeDeleteRequest(Node* node)
 
 void GraphWidget::onNodeCloneRequest(Node* node)
 {
-    auto clone = currentTree->cloneNode(*node);
-    processAddNode(clone);
+    currentTree->cloneNode(*node);
 }
 
 void GraphWidget::onNodeAddTransitionRequest(Node* node)
@@ -128,6 +127,18 @@ void GraphWidget::onNodeMoved(Node* node)
             n->adjust();
         }
     }
+}
+
+void GraphWidget::applyNewTree()
+{
+    clearAddTransition();
+    currentTree->clearTree();
+    nodeLinks.clear();
+
+    refreshGraph();
+    connectTreeSignals();
+
+    currentTree->createOriginNode();
 }
 
 
@@ -199,14 +210,12 @@ void GraphWidget::keyPressEvent(QKeyEvent *event)
 
 void GraphWidget::spawnChoiceNode()
 {
-    auto node = currentTree->createChoiceNode();
-    processAddNode(node);
+    currentTree->createChoiceNode();
 }
 
 void GraphWidget::spawnDialogueNode()
 {
-    auto node = currentTree->createDialogueNode();
-    processAddNode(node);
+    currentTree->createDialogueNode();
 }
 
 void GraphWidget::processAddNode(Node* node)

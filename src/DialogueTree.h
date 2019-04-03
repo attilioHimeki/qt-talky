@@ -31,6 +31,7 @@ public:
 signals:
     void contentChanged();
     void linkAdded(Node* startNode, Node* endNode);
+    void nodeAdded(Node* node);
 
 private:
     QString treeName;

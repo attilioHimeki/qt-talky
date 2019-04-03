@@ -44,6 +44,7 @@ private:
     QString currentLanguageCode;
 
 private slots:
+    bool newFile();
     bool loadFile();
     bool saveFile();
     bool saveFileAsNew();

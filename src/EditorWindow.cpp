@@ -49,6 +49,9 @@ void EditorWindow::setupMenuBar()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
 
+    QAction* actionNew = fileMenu->addAction(tr("New script"), this, &EditorWindow::newFile);
+    actionNew->setShortcut(QKeySequence::New);
+
     QAction* actionLoad = fileMenu->addAction(tr("Load script..."), this, &EditorWindow::loadFile);
     actionLoad->setShortcut(QKeySequence::Open);
 
@@ -78,6 +81,24 @@ void EditorWindow::setupSettingsDialog()
     settingsDialog = new SettingsDialog(this);
     connect(settingsDialog, &SettingsDialog::languageChanged, this, &EditorWindow::changeLanguage);
     connect(this, &EditorWindow::appLanguageChanged, settingsDialog, &SettingsDialog::retranslate);
+}
+
+bool EditorWindow::newFile()
+{
+    if(maybeSave())
+    {
+        currentOpenedFilePath = QString();
+
+        setWindowTitle(QCoreApplication::applicationName());
+
+        graphWidget->applyNewTree();
+
+        markFileNonDirty();
+
+        return true;
+    }
+
+    return false;
 }
 
 bool EditorWindow::loadFile()
