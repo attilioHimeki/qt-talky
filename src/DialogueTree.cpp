@@ -6,15 +6,21 @@ DialogueTree::DialogueTree()
     nodes = QList<Node*>();
 }
 
-Node* DialogueTree::createOriginNode()
+Node* DialogueTree::createNode(NodeType type)
 {
-    auto node = NodeBuilder::create(NodeType::Origin, nextNodeId++);
-    originNode = node;
+    auto node = NodeBuilder::create(type, nextNodeId++);
     nodes.append(node);
 
     emit nodeAdded(node);
     emit contentChanged();
 
+    return originNode;
+}
+
+Node* DialogueTree::createOriginNode()
+{
+    auto node = createNode(NodeType::Origin);
+    originNode = node;
     return originNode;
 }
 
@@ -102,26 +108,12 @@ void DialogueTree::read(const QJsonObject &json)
 
 Node* DialogueTree::createDialogueNode()
 {
-    auto node = NodeBuilder::create(NodeType::Dialogue, nextNodeId++);
-    nodes.append(node);
-    connect(node, &Node::nodeChanged, this, &DialogueTree::contentChanged);
-
-    emit nodeAdded(node);
-    emit contentChanged();
-
-    return node;
+    return createNode(NodeType::Dialogue);
 }
 
 Node* DialogueTree::createChoiceNode()
 {
-    auto node = NodeBuilder::create(NodeType::Choice, nextNodeId++);
-    nodes.append(node);
-    connect(node, &Node::nodeChanged, this, &DialogueTree::contentChanged);
-
-    emit nodeAdded(node);
-    emit contentChanged();
-
-    return node;
+    return createNode(NodeType::Choice);
 }
 
 void DialogueTree::deleteNode(Node* node)

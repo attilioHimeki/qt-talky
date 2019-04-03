@@ -21,6 +21,7 @@ public:
     Node* createDialogueNode();
     Node* createOriginNode();
     Node* createChoiceNode();
+    Node* createNode(NodeType type);
     Node* cloneNode(const Node& node);
 
     bool addNodeLink(Node* startNode, Node* endNode);
