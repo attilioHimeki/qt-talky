@@ -213,6 +213,11 @@ void GraphWidget::spawnChoiceNode()
     currentTree->createChoiceNode();
 }
 
+void GraphWidget::spawnChoiceOptionNode()
+{
+    currentTree->createChoiceOptionNode();
+}
+
 void GraphWidget::spawnDialogueNode()
 {
     currentTree->createDialogueNode();
@@ -246,6 +251,9 @@ void GraphWidget::showDefaultContextMenu(const QPoint& pos)
 
     QAction* addChoiceNodeAction = submenu->addAction(tr("Choice Node"), this, &GraphWidget::spawnChoiceNode);
     addChoiceNodeAction->setStatusTip(tr("Create a new choice node"));
+
+    QAction* addChoiceOptionNodeAction = submenu->addAction(tr("Choice Option Node"), this, &GraphWidget::spawnChoiceOptionNode);
+    addChoiceOptionNodeAction->setStatusTip(tr("Create a new choice option node"));
 
     menu.exec(clickPos);
 

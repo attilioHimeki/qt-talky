@@ -40,14 +40,14 @@ HEADERS += \
     src/OriginNode.h \
     src/NodeBuilder.h \
     src/ChoiceNode.h \
-    src/ChoiceNodeEntry.h \
     src/ChoiceNodeView.h \
     src/ChoiceNodeData.h \
     src/SettingsDialog.h \
     src/SettingsGeneralTab.h \
     src/SettingsLanguageTab.h \
     src/MouseLinkView.h \
-    src/LinkView.h
+    src/LinkView.h \
+    src/ChoiceOptionNode.h
 
 SOURCES += \
     src/main.cpp \
@@ -67,14 +67,14 @@ SOURCES += \
     src/OriginNode.cpp \
     src/NodeBuilder.cpp \
     src/ChoiceNode.cpp \
-    src/ChoiceNodeEntry.cpp \
     src/ChoiceNodeView.cpp \
     src/ChoiceNodeData.cpp \
     src/SettingsDialog.cpp \
     src/SettingsGeneralTab.cpp \
     src/SettingsLanguageTab.cpp \
     src/MouseLinkView.cpp \
-    src/LinkView.cpp
+    src/LinkView.cpp \
+    src/ChoiceOptionNode.cpp
 
 TRANSLATIONS += res/languages/talky_en.ts \
                 res/languages/talky_it.ts \

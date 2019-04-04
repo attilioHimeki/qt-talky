@@ -16,6 +16,10 @@ Node* NodeBuilder::create(NodeType type, int id)
         {
             return createChoiceNode(id);
         }
+        case NodeType::ChoiceOption:
+        {
+            return createChoiceOptionNode(id);
+        }
         default:
         {
             return createOriginNode(id);
@@ -42,6 +46,14 @@ Node* NodeBuilder::create(QJsonObject json, int id)
         case NodeType::Origin:
         {
             return createOriginNode(json, id);
+        }
+        case NodeType::Choice:
+        {
+            return createChoiceNode(json, id);
+        }
+        case NodeType::ChoiceOption:
+        {
+            return createChoiceOptionNode(json, id);
         }
         default:
         {
@@ -95,5 +107,21 @@ ChoiceNode* NodeBuilder::createChoiceNode(QJsonObject json, int id)
     nodeData->read(json);
 
     auto node = new ChoiceNode(nodeData);
+    return node;
+}
+
+ChoiceOptionNode* NodeBuilder::createChoiceOptionNode(int id)
+{
+    NodeData* nodeData = new NodeData(NodeType::ChoiceOption, id);
+    auto node = new ChoiceOptionNode(nodeData);
+    return node;
+}
+
+ChoiceOptionNode* NodeBuilder::createChoiceOptionNode(QJsonObject json, int id)
+{
+    NodeData* nodeData = new NodeData(NodeType::ChoiceOption, id);
+    nodeData->read(json);
+
+    auto node = new ChoiceOptionNode(nodeData);
     return node;
 }

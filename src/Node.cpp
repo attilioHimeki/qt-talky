@@ -61,3 +61,8 @@ const QPoint Node::getStartPosition() const
 {
     return model->startPos;
 }
+
+bool Node::validateAddNode(const Node& linkedNode) const
+{
+    return allowedNodeLinkTypes.contains(linkedNode.getNodeType());
+}

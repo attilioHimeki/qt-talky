@@ -4,6 +4,8 @@
 DialogueNode::DialogueNode(DialogueNodeData* data)
     : Node(data)
 {
+    allowedNodeLinkTypes.append(NodeType::Choice);
+    allowedNodeLinkTypes.append(NodeType::Dialogue);
 }
 
 void DialogueNode::setupView(GraphWidget *graphWidget)
@@ -31,5 +33,5 @@ void DialogueNode::onNodeTextKeyChanged(const QString& key)
 bool DialogueNode::validateAddNode(const Node& linkedNode) const
 {
     auto linksAmount = model->linkedNodes.count();
-    return linksAmount < 1 && linkedNode.getNodeType() != NodeType::Origin;
+    return linksAmount < 1 && Node::validateAddNode(linkedNode);
 }

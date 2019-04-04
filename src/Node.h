@@ -28,13 +28,15 @@ public:
     QList<NodeLink*> getLinkedNodes() const;
     void addLinkedNode(int linkedNodeId);
     void removeLinkedNode(int linkedNodeId);
-    virtual bool validateAddNode(const Node& linkedNode) const = 0;
+    virtual bool validateAddNode(const Node& linkedNode) const;
 
     const QPoint getStartPosition() const;
 
 protected:
     std::unique_ptr<NodeView> view;
     std::unique_ptr<NodeData> model;
+
+    QList<NodeType> allowedNodeLinkTypes;
 
 signals:
     void nodeChanged();

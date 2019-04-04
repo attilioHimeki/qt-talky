@@ -8,8 +8,8 @@ ChoiceNodeView::ChoiceNodeView(Node* ownerNode, GraphWidget *graphWidget)
 
 void ChoiceNodeView::populateContextualMenu(QMenu& menu)
 {
-    QAction* actionAddChoice = menu.addAction(tr("Add Choice"), dynamic_cast<ChoiceNode*>(owner), &ChoiceNode::addChoiceEntry);
-    actionAddChoice->setStatusTip(tr("Create a new choice entry"));
+//    QAction* actionAddChoice = menu.addAction(tr("Add Choice"), dynamic_cast<ChoiceNode*>(owner), &ChoiceNode::addChoiceEntry);
+//    actionAddChoice->setStatusTip(tr("Create a new choice entry"));
 
     menu.addSeparator();
 

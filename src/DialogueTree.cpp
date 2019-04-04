@@ -116,6 +116,11 @@ Node* DialogueTree::createChoiceNode()
     return createNode(NodeType::Choice);
 }
 
+Node* DialogueTree::createChoiceOptionNode()
+{
+    return createNode(NodeType::ChoiceOption);
+}
+
 void DialogueTree::deleteNode(Node* node)
 {
     nodes.removeOne(node);

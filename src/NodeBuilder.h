@@ -5,6 +5,7 @@
 #include "DialogueNode.h"
 #include "OriginNode.h"
 #include "ChoiceNode.h"
+#include "ChoiceOptionNode.h"
 
 class NodeBuilder
 {
@@ -20,6 +21,11 @@ private:
 
     static ChoiceNode* createChoiceNode(int id);
     static ChoiceNode* createChoiceNode(QJsonObject json, int id = -1);
+
+    static ChoiceOptionNode* createChoiceOptionNode(int id);
+    static ChoiceOptionNode* createChoiceOptionNode(QJsonObject json, int id = -1);
+
+
 };
 
 #endif // NODEBUILDER_H

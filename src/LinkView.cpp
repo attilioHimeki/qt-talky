@@ -9,7 +9,7 @@ LinkView::LinkView(GraphWidget *graphWidget)
 {
     setAcceptedMouseButtons(Q_NULLPTR);
 
-    setZValue(-1);
+    setZValue(-2);
 }
 
 QRectF LinkView::boundingRect() const
