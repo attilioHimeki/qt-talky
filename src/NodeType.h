@@ -31,7 +31,7 @@ inline NodeType getNodeTypeFromString(const QString& typeString)
     {
         return NodeType::Choice;
     }
-    else if(typeString == "choiceoption")
+    else if(typeString == "choiceOption")
     {
         return NodeType::ChoiceOption;
     }
@@ -67,7 +67,7 @@ inline QString getStringFromNodeType(NodeType type)
     }
     else if(type == NodeType::ChoiceOption)
     {
-        return "choiceoption";
+        return "choiceOption";
     }
 
     return "none";

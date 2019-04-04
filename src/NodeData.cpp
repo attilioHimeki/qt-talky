@@ -77,3 +77,15 @@ void NodeData::removeLinkedNode(int linkedNodeId)
         }
     }
 }
+
+bool NodeData::isLinkedWith(int nodeId) const
+{
+    for(auto link : linkedNodes)
+    {
+        if(link->getLinkedNodeId() == nodeId)
+        {
+            return true;
+        }
+    }
+    return false;
+}

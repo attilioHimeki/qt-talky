@@ -21,6 +21,7 @@ public:
 
     void addLinkedNode(int linkedNodeId);
     void removeLinkedNode(int linkedNodeId);
+    bool isLinkedWith(int nodeId) const;
 
     QPoint startPos;
     QList<NodeLink*> linkedNodes;

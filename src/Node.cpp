@@ -46,7 +46,6 @@ void Node::removeLinkedNode(int linkedNodeId)
     model->removeLinkedNode(linkedNodeId);
 }
 
-
 int Node::getNodeId() const
 {
     return model->getNodeId();
@@ -64,5 +63,5 @@ const QPoint Node::getStartPosition() const
 
 bool Node::validateAddNode(const Node& linkedNode) const
 {
-    return allowedNodeLinkTypes.contains(linkedNode.getNodeType());
+    return !model->isLinkedWith(linkedNode.getNodeId()) && allowedNodeLinkTypes.contains(linkedNode.getNodeType());
 }
