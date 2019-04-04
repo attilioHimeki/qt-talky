@@ -12,12 +12,14 @@ void DialogueNodeView::setupKeyLabel()
     keyTextField = new QLineEdit();
     keyTextField->setAlignment(Qt::AlignLeft);
     keyTextField->setFrame(true);
-    keyTextField->setStyleSheet("background: transparent;  border: 0px; color: #111111");
+    keyTextField->setStyleSheet("background:transparent; border: 2px; color: #111111");
     keyTextField->setPlaceholderText("key");
     keyTextField->show();
+    keyTextField->setFixedSize(nodeWidth - 20, 30);
+
     QGraphicsProxyWidget* pMyProxy = new QGraphicsProxyWidget(this);
     pMyProxy->setWidget(keyTextField);
-    pMyProxy->setPos(-50, -nodeHeight/2);
+    pMyProxy->setPos(-70, -20);
 }
 
 void DialogueNodeView::setKeyText(QString key)
