@@ -27,6 +27,8 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
 
     setCentralWidget(graphWidget);
 
+    loadEditorSettings();
+
     setupToolBar();
     setupMenuBar();
     setupSettingsDialog();
@@ -34,8 +36,6 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
     statusBar()->showMessage(tr("Status Bar"));
 
     setWindowTitle(QCoreApplication::applicationName());
-
-    loadViewSetup();
 }
 
 void EditorWindow::setupToolBar()
@@ -73,7 +73,9 @@ void EditorWindow::setupMenuBar()
     aboutMenu->addAction(tr("About &Qt"), qApp, &QApplication::aboutQt);
 
     QAction *actionOpenPrefs = aboutMenu->addAction(tr("Preferences"), this, &EditorWindow::openSettings);
+    actionOpenPrefs->setMenuRole(QAction::PreferencesRole);
     actionOpenPrefs->setShortcut(QKeySequence::Preferences);
+
 }
 
 void EditorWindow::setupSettingsDialog()
@@ -238,7 +240,7 @@ void EditorWindow::closeEvent(QCloseEvent* event)
 {
     if (maybeSave())
     {
-        saveViewSetup();
+        saveEditorSettings();
         event->accept();
     }
     else
@@ -247,25 +249,28 @@ void EditorWindow::closeEvent(QCloseEvent* event)
     }
 }
 
-void EditorWindow::loadViewSetup()
+void EditorWindow::loadEditorSettings()
 {
-    QSettings viewSettings;
+    QSettings settings;
 
-    QPoint pos = viewSettings.value("pos", QPoint(200, 200)).toPoint();
-    QSize size = viewSettings.value("size", QSize(500, 500)).toSize();
-    QByteArray state = viewSettings.value("state", QByteArray()).toByteArray();
+    QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
+    QSize size = settings.value("size", QSize(500, 500)).toSize();
+    QByteArray state = settings.value("state", QByteArray()).toByteArray();
     restoreState(state);
     resize(size);
     move(pos);
 
+    QString lang = settings.value("lang", defaultLanguage).toString();
+    changeLanguage(lang);
 }
 
-void EditorWindow::saveViewSetup()
+void EditorWindow::saveEditorSettings()
 {
-    QSettings viewSettings;
-    viewSettings.setValue("pos", pos());
-    viewSettings.setValue("size", size());
-    viewSettings.setValue("state", saveState());
+    QSettings settings;
+    settings.setValue("pos", pos());
+    settings.setValue("size", size());
+    settings.setValue("state", saveState());
+    settings.setValue("lang", currentLanguageCode);
 }
 
 bool EditorWindow::hasOpenedSaveFile()

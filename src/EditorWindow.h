@@ -26,8 +26,8 @@ private:
     void setupMenuBar();
     void setupSettingsDialog();
 
-    void loadViewSetup();
-    void saveViewSetup();
+    void loadEditorSettings();
+    void saveEditorSettings();
     bool hasOpenedSaveFile();
 
     QMenu *fileMenu;

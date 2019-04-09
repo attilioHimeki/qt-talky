@@ -2,116 +2,108 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en">
 <context>
-    <name>ChoiceNodeView</name>
-    <message>
-        <location filename="../../src/ChoiceNodeView.cpp" line="11"/>
-        <source>Add Choice</source>
-        <translation>Add Choice</translation>
-    </message>
-    <message>
-        <location filename="../../src/ChoiceNodeView.cpp" line="12"/>
-        <source>Create a new choice entry</source>
-        <translation>Create a new choice entry</translation>
-    </message>
-</context>
-<context>
     <name>EditorWindow</name>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="35"/>
+        <location filename="../../src/EditorWindow.cpp" line="36"/>
         <source>Status Bar</source>
         <translation>Status Bar</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="54"/>
+        <location filename="../../src/EditorWindow.cpp" line="50"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="56"/>
+        <location filename="../../src/EditorWindow.cpp" line="52"/>
+        <source>New script</source>
+        <translation>New script</translation>
+    </message>
+    <message>
+        <location filename="../../src/EditorWindow.cpp" line="55"/>
         <source>Load script...</source>
         <translation>Load script...</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="59"/>
+        <location filename="../../src/EditorWindow.cpp" line="58"/>
         <source>Save script</source>
         <translation>Save script</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="62"/>
+        <location filename="../../src/EditorWindow.cpp" line="61"/>
         <source>Save script as...</source>
         <translation>Save script as...</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="70"/>
+        <location filename="../../src/EditorWindow.cpp" line="69"/>
         <source>Edit</source>
         <translation>Edit</translation>
     </message>
     <message>
+        <location filename="../../src/EditorWindow.cpp" line="71"/>
         <location filename="../../src/EditorWindow.cpp" line="72"/>
-        <location filename="../../src/EditorWindow.cpp" line="73"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="74"/>
+        <location filename="../../src/EditorWindow.cpp" line="73"/>
         <source>About &amp;Qt</source>
         <translation>About &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="76"/>
+        <location filename="../../src/EditorWindow.cpp" line="75"/>
         <source>Preferences</source>
         <translation>Preferences</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="85"/>
+        <location filename="../../src/EditorWindow.cpp" line="109"/>
         <source>Open Dialog Tree</source>
         <translation>Open Dialog Tree</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="86"/>
+        <location filename="../../src/EditorWindow.cpp" line="110"/>
         <source>Dialogue Tree (*.json);;All Files (*)</source>
         <translation>Dialogue Tree (*.json);;All Files (*)</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="107"/>
-        <location filename="../../src/EditorWindow.cpp" line="114"/>
+        <location filename="../../src/EditorWindow.cpp" line="131"/>
+        <location filename="../../src/EditorWindow.cpp" line="138"/>
         <source>Talky</source>
         <translation>Talky</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="108"/>
+        <location filename="../../src/EditorWindow.cpp" line="132"/>
         <source>The Json document is not valid</source>
         <translation>The Json document is not valid</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="115"/>
+        <location filename="../../src/EditorWindow.cpp" line="139"/>
         <source>The Json document is empty</source>
         <translation>The Json document is empty</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="160"/>
+        <location filename="../../src/EditorWindow.cpp" line="184"/>
         <source>Create New File</source>
         <translation>Create New File</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="183"/>
+        <location filename="../../src/EditorWindow.cpp" line="207"/>
         <source>Unsaved Changes</source>
         <translation>Unsaved Changes</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="184"/>
+        <location filename="../../src/EditorWindow.cpp" line="208"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>The document has been modified.
         Do you want to save your changes?</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="266"/>
+        <location filename="../../src/EditorWindow.cpp" line="293"/>
         <source>About Talky</source>
         <translation>About Talky</translation>
     </message>
     <message>
-        <location filename="../../src/EditorWindow.cpp" line="267"/>
+        <location filename="../../src/EditorWindow.cpp" line="294"/>
         <source>&lt;b&gt;Talky&lt;/b&gt; is a node based editor to design dialogues and character interactions for games.</source>
         <translation>&lt;b&gt;Talky&lt;/b&gt; is a node based editor to design dialogues and character interactions for games.</translation>
     </message>
@@ -119,29 +111,49 @@ Do you want to save your changes?</source>
 <context>
     <name>GraphWidget</name>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="198"/>
+        <location filename="../../src/GraphWidget.cpp" line="247"/>
         <source>New Node</source>
         <translation>New Node</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="200"/>
+        <location filename="../../src/GraphWidget.cpp" line="249"/>
         <source>Dialogue Node</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="201"/>
+        <location filename="../../src/GraphWidget.cpp" line="250"/>
         <source>Create a new dialogue node</source>
         <translation>Create a new dialogue node</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="203"/>
+        <location filename="../../src/GraphWidget.cpp" line="252"/>
         <source>Choice Node</source>
         <translation>Choice Node</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="204"/>
+        <location filename="../../src/GraphWidget.cpp" line="253"/>
         <source>Create a new choice node</source>
         <translation>Create a new choice node</translation>
+    </message>
+    <message>
+        <location filename="../../src/GraphWidget.cpp" line="255"/>
+        <source>Choice Option Node</source>
+        <translation>Choice Option Node</translation>
+    </message>
+    <message>
+        <location filename="../../src/GraphWidget.cpp" line="256"/>
+        <source>Create a new choice option node</source>
+        <translation>Create a new choice option node</translation>
+    </message>
+    <message>
+        <location filename="../../src/GraphWidget.cpp" line="336"/>
+        <source>Error linking nodes</source>
+        <translation>Error linking nodes</translation>
+    </message>
+    <message>
+        <location filename="../../src/GraphWidget.cpp" line="336"/>
+        <source>This link is not allowed</source>
+        <translation>This link is not allowed</translation>
     </message>
 </context>
 <context>
@@ -181,16 +193,19 @@ Do you want to save your changes?</source>
     <name>SettingsDialog</name>
     <message>
         <location filename="../../src/SettingsDialog.cpp" line="14"/>
+        <location filename="../../src/SettingsDialog.cpp" line="37"/>
         <source>General</source>
         <translation>General</translation>
     </message>
     <message>
         <location filename="../../src/SettingsDialog.cpp" line="17"/>
+        <location filename="../../src/SettingsDialog.cpp" line="38"/>
         <source>Language</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../../src/SettingsDialog.cpp" line="34"/>
+        <location filename="../../src/SettingsDialog.cpp" line="32"/>
+        <location filename="../../src/SettingsDialog.cpp" line="40"/>
         <source>Preferences</source>
         <translation>Preferences</translation>
     </message>
@@ -198,12 +213,12 @@ Do you want to save your changes?</source>
 <context>
     <name>SettingsGeneralTab</name>
     <message>
-        <location filename="../../src/SettingsGeneralTab.cpp" line="11"/>
+        <location filename="../../src/SettingsGeneralTab.cpp" line="12"/>
         <source>Enable auto-save</source>
         <translation>Enable auto-save</translation>
     </message>
     <message>
-        <location filename="../../src/SettingsGeneralTab.cpp" line="13"/>
+        <location filename="../../src/SettingsGeneralTab.cpp" line="14"/>
         <source>Auto-save interval:</source>
         <translation>Auto-save interval:</translation>
     </message>
@@ -211,7 +226,7 @@ Do you want to save your changes?</source>
 <context>
     <name>SettingsLanguageTab</name>
     <message>
-        <location filename="../../src/SettingsLanguageTab.cpp" line="22"/>
+        <location filename="../../src/SettingsLanguageTab.cpp" line="14"/>
         <source>Choose Language</source>
         <translation>Choose Language</translation>
     </message>

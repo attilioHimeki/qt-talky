@@ -1,19 +1,17 @@
 #include "SettingsGeneralTab.h"
 
-#include <QLabel>
-#include <QLineEdit>
-#include <QCheckBox>
 #include <QVBoxLayout>
 #include <QRegExpValidator>
 
 SettingsGeneralTab::SettingsGeneralTab(QWidget *parent)
     : QWidget(parent)
 {
-    QCheckBox *enableAutosaveCheckBox = new QCheckBox(tr("Enable auto-save"));
+    enableAutosaveCheckBox = new QCheckBox(tr("Enable auto-save"), this);
 
-    QLabel *autosaveIntervalLabel = new QLabel(tr("Auto-save interval:"));
+    autosaveIntervalLabel = new QLabel(tr("Auto-save interval:"), this);
     autosaveIntervalLabel->setVisible(enableAutosaveCheckBox->isChecked());
-    QLineEdit *autosaveIntervalField = new QLineEdit("0");
+
+    autosaveIntervalField = new QLineEdit("0", this);
     autosaveIntervalField->setValidator(new QRegExpValidator(QRegExp("^([1-9][0-9]*)|([0])$")));
     autosaveIntervalField->setVisible(enableAutosaveCheckBox->isChecked());
 
@@ -25,8 +23,14 @@ SettingsGeneralTab::SettingsGeneralTab(QWidget *parent)
     mainLayout->addStretch(1);
     setLayout(mainLayout);
 
-    connect(enableAutosaveCheckBox, &QCheckBox::toggled, [autosaveIntervalField, autosaveIntervalLabel](bool checked){
+    connect(enableAutosaveCheckBox, &QCheckBox::toggled, [this](bool checked){
            autosaveIntervalField->setVisible(checked);
            autosaveIntervalLabel->setVisible(checked);
        });
+}
+
+void SettingsGeneralTab::retranslate()
+{
+    enableAutosaveCheckBox->setText(tr("Enable auto-save"));
+    autosaveIntervalLabel->setText(tr("Auto-save interval:"));
 }

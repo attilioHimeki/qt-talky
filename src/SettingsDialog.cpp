@@ -1,6 +1,4 @@
 #include "SettingsDialog.h"
-#include "SettingsGeneralTab.h"
-#include "SettingsLanguageTab.h"
 
 #include <QTabWidget>
 #include <QVBoxLayout>
@@ -11,14 +9,15 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     : QDialog(parent)
 {
     tabWidget = new QTabWidget(this);
-    tabWidget->addTab(new SettingsGeneralTab(this), tr("General"));
 
-    auto languagesTab = new SettingsLanguageTab(this);
+    generalTab = new SettingsGeneralTab(this);
+    tabWidget->addTab(generalTab, tr("General"));
+
+    languagesTab = new SettingsLanguageTab(this);
     tabWidget->addTab(languagesTab, tr("Language"));
     connect(languagesTab, &SettingsLanguageTab::languageChanged, this, &SettingsDialog::languageChanged);
 
-    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
@@ -36,6 +35,9 @@ void SettingsDialog::retranslate()
 {
     tabWidget->setTabText(0, tr("General"));
     tabWidget->setTabText(1, tr("Language"));
+
+    languagesTab->retranslate();
+    generalTab->retranslate();
 
     setWindowTitle(tr("Preferences"));
 }

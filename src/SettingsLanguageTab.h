@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QGroupBox>
 #include <QButtonGroup>
+#include <QRadioButton>
 
 class SettingsLanguageTab : public QWidget
 {
@@ -13,11 +14,18 @@ public:
 
 private:
     QGroupBox* languagesGroupBox;
+    QRadioButton *enRadioButton;
+    QRadioButton *itRadioButton;
+    QRadioButton *ptRadioButton;
 
 private slots:
+    void refreshActiveSettings();
     void onEnglishLanguageToggled(bool checked);
     void onItalianLanguageToggled(bool checked);
     void onPortugueseLanguageToggled(bool checked);
+
+public slots:
+    void retranslate();
 
 signals:
     void languageChanged(const QString& langCode);

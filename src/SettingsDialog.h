@@ -1,6 +1,9 @@
 #ifndef SETTINGSDIALOG_H
 #define SETTINGSDIALOG_H
 
+#include "SettingsGeneralTab.h"
+#include "SettingsLanguageTab.h"
+
 #include <QDialog>
 #include <QTabWidget>
 #include <QDialogButtonBox>
@@ -14,6 +17,9 @@ public:
 private:
     QTabWidget *tabWidget;
     QDialogButtonBox *buttonBox;
+
+    SettingsLanguageTab* languagesTab;
+    SettingsGeneralTab* generalTab;
 
 public slots:
     void retranslate();
