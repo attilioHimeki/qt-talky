@@ -261,26 +261,23 @@ void GraphWidget::showDefaultContextMenu(const QPoint& pos)
 
 void GraphWidget::showContextMenu(const QPoint& pos)
 {
-     QGraphicsItem* item = itemAt(pos);
-     if(item == Q_NULLPTR)
+     QList<QGraphicsItem*> itemsClicked = items(pos);
+
+     for(auto item : itemsClicked)
      {
-         showDefaultContextMenu(pos);
+         auto nodeView = dynamic_cast<NodeView*>(item);
+         if(nodeView != Q_NULLPTR)
+         {
+             auto clickPos = mapToGlobal(pos);
+             QMenu menu(this);
+             nodeView->populateContextualMenu(menu);
+             menu.exec(clickPos);
+
+             return;
+         }
      }
-     else
-     {
-        auto nodeView = dynamic_cast<NodeView*>(item);
-        if(nodeView != Q_NULLPTR)
-        {
-            auto clickPos = mapToGlobal(pos);
-            QMenu menu(this);
-            nodeView->populateContextualMenu(menu);
-            menu.exec(clickPos);
-        }
-        else
-        {
-            showDefaultContextMenu(pos);
-        }
-     }
+
+     showDefaultContextMenu(pos);
 }
 
 void GraphWidget::wheelEvent(QWheelEvent *event)
@@ -324,18 +321,23 @@ void GraphWidget::mousePressEvent(QMouseEvent * event)
     if(isAddingTransition)
     {
         auto pos = event->pos();
-        QGraphicsItem* item = itemAt(pos);
-        if(item != Q_NULLPTR)
+        QList<QGraphicsItem*> itemsClicked = items(pos);
+        for(auto item : itemsClicked)
         {
-           auto nodeView = dynamic_cast<NodeView*>(item);
-           if(nodeView != Q_NULLPTR)
-           {
-               bool success = currentTree->addNodeLink(currentTransitionNode, nodeView->getOwner());
-               if(!success)
+            if(item != Q_NULLPTR)
+            {
+               auto nodeView = dynamic_cast<NodeView*>(item);
+               if(nodeView != Q_NULLPTR)
                {
-                   QMessageBox::warning(this, tr("Error linking nodes"), tr("This link is not allowed"));
+                   bool success = currentTree->addNodeLink(currentTransitionNode, nodeView->getOwner());
+                   if(!success)
+                   {
+                       QMessageBox::warning(this, tr("Error linking nodes"), tr("This link is not allowed"));
+                   }
+
+                   break;
                }
-           }
+            }
         }
 
         clearAddTransition();
