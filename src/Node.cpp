@@ -7,8 +7,8 @@ Node::Node(NodeData* data)
 
 void Node::setupView(GraphWidget *graphWidget)
 {
-     auto startPos = model->startPos;
-     view->setPos(startPos.x(), startPos.y());
+     auto startPos = model->getSerialisedGraphPosition();
+     view->setPos(startPos);
 
      view->setupTypeLabel(model->type);
      view->setupIdLabel(model->getNodeId());
@@ -28,6 +28,7 @@ QList<NodeLink*> Node::getLinkedNodes() const
 
 void Node::write(QJsonObject &json) const
 {
+    model->refreshSerialisedGraphPosition(view->pos());
     model->write(json);
 }
 
@@ -56,9 +57,14 @@ NodeType Node::getNodeType() const
     return model->type;
 }
 
-const QPoint Node::getStartPosition() const
+const QPointF Node::getCurrentGraphPosition() const
 {
-    return model->startPos;
+    return view->pos();
+}
+
+const QPointF Node::getSerialisedGraphPosition() const
+{
+    return model->getSerialisedGraphPosition();
 }
 
 bool Node::validateAddNode(const Node& linkedNode) const

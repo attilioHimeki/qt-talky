@@ -23,6 +23,8 @@ void NodeData::write(QJsonObject &json) const
     json["nodeId"] = nodeId;
     json["nodeType"] = getStringFromNodeType(type);
 
+    json["x"] = serialisedGraphPosition.x();
+    json["y"] = serialisedGraphPosition.y();
 }
 
 void NodeData::read(const QJsonObject &json, bool readId)
@@ -38,8 +40,8 @@ void NodeData::read(const QJsonObject &json, bool readId)
     auto startX = json["x"].toInt();
     auto startY = json["y"].toInt();
 
-    QPoint pos(startX, startY);
-    startPos = pos;
+    QPointF pos(startX, startY);
+    serialisedGraphPosition = pos;
 
     linkedNodes.clear();
 
@@ -88,4 +90,14 @@ bool NodeData::isLinkedWith(int nodeId) const
         }
     }
     return false;
+}
+
+QPointF NodeData::getSerialisedGraphPosition() const
+{
+    return serialisedGraphPosition;
+}
+
+void NodeData::refreshSerialisedGraphPosition(QPointF pos)
+{
+    serialisedGraphPosition = pos;
 }

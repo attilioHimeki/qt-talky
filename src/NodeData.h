@@ -23,12 +23,15 @@ public:
     void removeLinkedNode(int linkedNodeId);
     bool isLinkedWith(int nodeId) const;
 
-    QPoint startPos;
+    QPointF getSerialisedGraphPosition() const;
+    void refreshSerialisedGraphPosition(QPointF pos);
+
     QList<NodeLink*> linkedNodes;
     NodeType type;
 
 protected:
     int nodeId;
+    QPointF serialisedGraphPosition;
 };
 
 #endif // NODEDATA_H

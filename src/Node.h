@@ -30,7 +30,8 @@ public:
     void removeLinkedNode(int linkedNodeId);
     virtual bool validateAddNode(const Node& linkedNode) const;
 
-    const QPoint getStartPosition() const;
+    const QPointF getCurrentGraphPosition() const;
+    const QPointF getSerialisedGraphPosition() const;
 
 protected:
     std::unique_ptr<NodeView> view;

@@ -24,6 +24,10 @@ Node* NodeView::getOwner() const
     return owner;
 }
 
+void NodeView::moveTo(QPointF pos)
+{
+    setPos(pos);
+}
 
 void NodeView::setupTypeLabel(NodeType type)
 {
