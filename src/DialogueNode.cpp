@@ -4,8 +4,6 @@
 DialogueNode::DialogueNode(DialogueNodeData* data)
     : Node(data)
 {
-    allowedNodeLinkTypes.append(NodeType::Choice);
-    allowedNodeLinkTypes.append(NodeType::Dialogue);
 }
 
 void DialogueNode::setupView(GraphWidget *graphWidget)

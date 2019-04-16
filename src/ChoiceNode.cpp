@@ -3,7 +3,6 @@
 ChoiceNode::ChoiceNode(NodeData* data)
     : Node(data)
 {
-    allowedNodeLinkTypes.append(NodeType::ChoiceOption);
 }
 
 void ChoiceNode::setupView(GraphWidget *graphWidget)

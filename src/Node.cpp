@@ -69,5 +69,5 @@ const QPointF Node::getSerialisedGraphPosition() const
 
 bool Node::validateAddNode(const Node& linkedNode) const
 {
-    return !model->isLinkedWith(linkedNode.getNodeId()) && allowedNodeLinkTypes.contains(linkedNode.getNodeType());
+    return !model->isLinkedWith(linkedNode.getNodeId());
 }

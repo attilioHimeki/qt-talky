@@ -3,7 +3,11 @@
 DialogueTree::DialogueTree()
     :nextNodeId(0)
 {
-    nodes = QList<Node*>();
+    allowedConnectionsScheme.insert(NodeType::Origin, NodeType::Dialogue);
+    allowedConnectionsScheme.insert(NodeType::Dialogue, NodeType::Dialogue);
+    allowedConnectionsScheme.insert(NodeType::Dialogue, NodeType::Choice);
+    allowedConnectionsScheme.insert(NodeType::Choice, NodeType::ChoiceOption);
+    allowedConnectionsScheme.insert(NodeType::ChoiceOption, NodeType::Dialogue);
 }
 
 Node* DialogueTree::createNode(NodeType type)
@@ -52,7 +56,8 @@ Node* DialogueTree::getNodeById(int nodeId) const
 
 bool DialogueTree::addNodeLink(Node* startNode, Node* endNode)
 {
-    if(startNode->validateAddNode(*endNode))
+    if(isNodeLinkLegal(startNode->getNodeType(), endNode->getNodeType()) &&
+        startNode->validateAddNode(*endNode))
     {
         startNode->addLinkedNode(endNode->getNodeId());
 
@@ -62,6 +67,12 @@ bool DialogueTree::addNodeLink(Node* startNode, Node* endNode)
         return true;
     }
     return false;
+}
+
+bool DialogueTree::isNodeLinkLegal(const NodeType startNodeType, const NodeType endNodeType) const
+{
+    return allowedConnectionsScheme.contains(startNodeType, endNodeType) ||
+            allowedConnectionsScheme.contains(startNodeType, NodeType::Any);
 }
 
 void DialogueTree::write(QJsonObject &json) const

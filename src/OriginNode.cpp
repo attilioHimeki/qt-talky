@@ -3,7 +3,6 @@
 OriginNode::OriginNode(NodeData* data)
     : Node(data)
 {
-    allowedNodeLinkTypes.append(NodeType::Dialogue);
 }
 
 void OriginNode::setupView(GraphWidget *graphWidget)
@@ -16,5 +15,5 @@ void OriginNode::setupView(GraphWidget *graphWidget)
 bool OriginNode::validateAddNode(const Node& linkedNode) const
 {
     auto linksAmount = model->linkedNodes.count();
-    return linksAmount < 1 && Node::validateAddNode(linkedNode);
+    return linksAmount < 1;
 }

@@ -26,6 +26,7 @@ public:
     Node* cloneNode(const Node& node);
 
     bool addNodeLink(Node* startNode, Node* endNode);
+    bool isNodeLinkLegal(const NodeType startNodeType, const NodeType endNodeType) const;
     void deleteNode(Node* node);
     void clearTree();
     QList<Node*> nodes;
@@ -40,6 +41,8 @@ private:
 
     Node* originNode;
     int nextNodeId;
+
+    QMultiMap<NodeType, NodeType> allowedConnectionsScheme;
 };
 
 #endif // DIALOGUETREE_H

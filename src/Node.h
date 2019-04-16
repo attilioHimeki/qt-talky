@@ -36,8 +36,6 @@ protected:
     std::unique_ptr<NodeView> view;
     std::unique_ptr<NodeData> model;
 
-    QList<NodeType> allowedNodeLinkTypes;
-
 signals:
     void nodeChanged();
 

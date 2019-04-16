@@ -3,13 +3,17 @@
 
 #include <QString>
 
-enum class NodeType {None, Origin, Dialogue, Pause, Action, Choice, ChoiceOption, RandomLink};
+enum class NodeType {None, Any, Origin, Dialogue, Pause, Action, Choice, ChoiceOption, RandomLink};
 
 inline NodeType getNodeTypeFromString(const QString& typeString)
 {
     if(typeString == "none")
     {
         return NodeType::None;
+    }
+    else if(typeString == "any")
+    {
+        return NodeType::Any;
     }
     else if(typeString == "origin")
     {
@@ -44,6 +48,10 @@ inline QString getStringFromNodeType(NodeType type)
     if(type == NodeType::None)
     {
         return "none";
+    }
+    else if(type == NodeType::Any)
+    {
+        return "any";
     }
     else if(type == NodeType::Origin)
     {
