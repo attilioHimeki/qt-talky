@@ -1,5 +1,4 @@
 #include "ChoiceNode.h"
-#include "ChoiceNodeView.h"
 
 ChoiceNode::ChoiceNode(NodeData* data)
     : Node(data)
@@ -9,7 +8,7 @@ ChoiceNode::ChoiceNode(NodeData* data)
 
 void ChoiceNode::setupView(GraphWidget *graphWidget)
 {
-    view = std::make_unique<ChoiceNodeView>(this, graphWidget);
+    view = std::make_unique<NodeView>(this, graphWidget);
 
     Node::setupView(graphWidget);
 }

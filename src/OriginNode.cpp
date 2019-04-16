@@ -8,7 +8,7 @@ OriginNode::OriginNode(NodeData* data)
 
 void OriginNode::setupView(GraphWidget *graphWidget)
 {
-    view = std::make_unique<OriginNodeView>(this, graphWidget);
+    view = std::make_unique<NodeView>(this, graphWidget);
 
     Node::setupView(graphWidget);
 }

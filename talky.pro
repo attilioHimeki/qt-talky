@@ -33,15 +33,12 @@ HEADERS += \
     src/EditorWindow.h \
     src/DialogueTree.h \
     src/DialogueNodeView.h \
-    src/OriginNodeView.h \
     src/NodeLinkView.h \
     src/DialogueNodeData.h \
     src/DialogueNode.h \
     src/OriginNode.h \
     src/NodeBuilder.h \
     src/ChoiceNode.h \
-    src/ChoiceNodeView.h \
-    src/ChoiceNodeData.h \
     src/SettingsDialog.h \
     src/SettingsGeneralTab.h \
     src/SettingsLanguageTab.h \
@@ -51,7 +48,6 @@ HEADERS += \
 
 SOURCES += \
     src/main.cpp \
-    src/OriginNodeView.cpp \
     src/NodeLinkView.cpp \
     src/NodeData.cpp \
     src/Node.cpp \
@@ -67,8 +63,6 @@ SOURCES += \
     src/OriginNode.cpp \
     src/NodeBuilder.cpp \
     src/ChoiceNode.cpp \
-    src/ChoiceNodeView.cpp \
-    src/ChoiceNodeData.cpp \
     src/SettingsDialog.cpp \
     src/SettingsGeneralTab.cpp \
     src/SettingsLanguageTab.cpp \

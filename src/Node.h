@@ -5,7 +5,6 @@
 #include "NodeData.h"
 #include "NodeView.h"
 #include "DialogueNodeView.h"
-#include "OriginNodeView.h"
 
 
 class Node : public QObject
