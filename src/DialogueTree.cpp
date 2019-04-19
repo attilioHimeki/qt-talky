@@ -10,9 +10,9 @@ DialogueTree::DialogueTree()
     allowedConnectionsScheme.insert(NodeType::ChoiceOption, NodeType::Dialogue);
 }
 
-Node* DialogueTree::createNode(NodeType type)
+Node* DialogueTree::createNode(NodeType type, QPointF pos)
 {
-    auto node = NodeBuilder::create(type, nextNodeId++);
+    auto node = NodeBuilder::create(type, nextNodeId++, pos);
     nodes.append(node);
 
     emit nodeAdded(node);
@@ -21,9 +21,9 @@ Node* DialogueTree::createNode(NodeType type)
     return originNode;
 }
 
-Node* DialogueTree::createOriginNode()
+Node* DialogueTree::createOriginNode(QPointF pos)
 {
-    auto node = createNode(NodeType::Origin);
+    auto node = createNode(NodeType::Origin, pos);
     originNode = node;
     return originNode;
 }
@@ -33,6 +33,7 @@ Node* DialogueTree::cloneNode(const Node &node)
     QJsonObject nodeObject;
     node.write(nodeObject);
     auto clone = NodeBuilder::create(nodeObject, nextNodeId++);
+
     nodes.append(clone);
 
     emit nodeAdded(clone);
@@ -117,19 +118,19 @@ void DialogueTree::read(const QJsonObject &json)
     treeName = json.value("name").toString();
 }
 
-Node* DialogueTree::createDialogueNode()
+Node* DialogueTree::createDialogueNode(QPointF pos)
 {
-    return createNode(NodeType::Dialogue);
+    return createNode(NodeType::Dialogue, pos);
 }
 
-Node* DialogueTree::createChoiceNode()
+Node* DialogueTree::createChoiceNode(QPointF pos)
 {
-    return createNode(NodeType::Choice);
+    return createNode(NodeType::Choice, pos);
 }
 
-Node* DialogueTree::createChoiceOptionNode()
+Node* DialogueTree::createChoiceOptionNode(QPointF pos)
 {
-    return createNode(NodeType::ChoiceOption);
+    return createNode(NodeType::ChoiceOption, pos);
 }
 
 void DialogueTree::deleteNode(Node* node)

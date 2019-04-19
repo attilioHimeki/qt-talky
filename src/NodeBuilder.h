@@ -10,19 +10,19 @@
 class NodeBuilder
 {
 public:
-    static Node* create(NodeType type, int id);
+    static Node* create(NodeType type, int id, QPointF pos = {});
     static Node* create(QJsonObject json, int id = -1);
 private:
-    static DialogueNode* createDialogueNode(int id);
+    static DialogueNode* createDialogueNode(int id, QPointF pos = {});
     static DialogueNode* createDialogueNode(QJsonObject json, int id = -1);
 
-    static OriginNode* createOriginNode(int id);
+    static OriginNode* createOriginNode(int id, QPointF pos = {});
     static OriginNode* createOriginNode(QJsonObject json, int id = -1);
 
-    static ChoiceNode* createChoiceNode(int id);
+    static ChoiceNode* createChoiceNode(int id, QPointF pos = {});
     static ChoiceNode* createChoiceNode(QJsonObject json, int id = -1);
 
-    static ChoiceOptionNode* createChoiceOptionNode(int id);
+    static ChoiceOptionNode* createChoiceOptionNode(int id, QPointF pos = {});
     static ChoiceOptionNode* createChoiceOptionNode(QJsonObject json, int id = -1);
 
 

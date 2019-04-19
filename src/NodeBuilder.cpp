@@ -1,28 +1,28 @@
 #include "NodeBuilder.h"
 
-Node* NodeBuilder::create(NodeType type, int id)
+Node* NodeBuilder::create(NodeType type, int id, QPointF pos)
 {
     switch(type)
     {
         case NodeType::Dialogue:
         {
-            return createDialogueNode(id);
+            return createDialogueNode(id, pos);
         }
         case NodeType::Origin:
         {
-            return createOriginNode(id);
+            return createOriginNode(id, pos);
         }
         case NodeType::Choice:
         {
-            return createChoiceNode(id);
+            return createChoiceNode(id, pos);
         }
         case NodeType::ChoiceOption:
         {
-            return createChoiceOptionNode(id);
+            return createChoiceOptionNode(id, pos);
         }
         default:
         {
-            return createOriginNode(id);
+            return createOriginNode(id, pos);
         }
     }
 }
@@ -62,9 +62,10 @@ Node* NodeBuilder::create(QJsonObject json, int id)
     }
 }
 
-DialogueNode* NodeBuilder::createDialogueNode(int id)
+DialogueNode* NodeBuilder::createDialogueNode(int id, QPointF pos)
 {
     auto nodeData = new DialogueNodeData(id);
+    nodeData->refreshSerialisedGraphPosition(pos);
     auto node = new DialogueNode(nodeData);
     return node;
 }
@@ -78,9 +79,10 @@ DialogueNode* NodeBuilder::createDialogueNode(QJsonObject json, int id)
     return node;
 }
 
-OriginNode* NodeBuilder::createOriginNode(int id)
+OriginNode* NodeBuilder::createOriginNode(int id, QPointF pos)
 {
     NodeData* nodeData = new NodeData(NodeType::Origin, id);
+    nodeData->refreshSerialisedGraphPosition(pos);
     auto node = new OriginNode(nodeData);
     return node;
 }
@@ -94,9 +96,10 @@ OriginNode* NodeBuilder::createOriginNode(QJsonObject json, int id)
     return node;
 }
 
-ChoiceNode* NodeBuilder::createChoiceNode(int id)
+ChoiceNode* NodeBuilder::createChoiceNode(int id, QPointF pos)
 {
     NodeData* nodeData = new NodeData(NodeType::Choice, id);
+    nodeData->refreshSerialisedGraphPosition(pos);
     auto node = new ChoiceNode(nodeData);
     return node;
 }
@@ -110,9 +113,10 @@ ChoiceNode* NodeBuilder::createChoiceNode(QJsonObject json, int id)
     return node;
 }
 
-ChoiceOptionNode* NodeBuilder::createChoiceOptionNode(int id)
+ChoiceOptionNode* NodeBuilder::createChoiceOptionNode(int id, QPointF pos)
 {
     NodeData* nodeData = new NodeData(NodeType::ChoiceOption, id);
+    nodeData->refreshSerialisedGraphPosition(pos);
     auto node = new ChoiceOptionNode(nodeData);
     return node;
 }

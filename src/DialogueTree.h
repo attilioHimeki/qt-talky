@@ -18,11 +18,11 @@ public:
     void write(QJsonObject &json) const;
 
     Node* getNodeById(int nodeId) const;
-    Node* createDialogueNode();
-    Node* createOriginNode();
-    Node* createChoiceNode();
-    Node* createChoiceOptionNode();
-    Node* createNode(NodeType type);
+    Node* createDialogueNode(QPointF pos = {});
+    Node* createOriginNode(QPointF pos = {});
+    Node* createChoiceNode(QPointF pos = {});
+    Node* createChoiceOptionNode(QPointF pos = {});
+    Node* createNode(NodeType type, QPointF pos = {});
     Node* cloneNode(const Node& node);
 
     bool addNodeLink(Node* startNode, Node* endNode);

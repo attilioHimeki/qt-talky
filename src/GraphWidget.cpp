@@ -210,17 +210,20 @@ void GraphWidget::keyPressEvent(QKeyEvent *event)
 
 void GraphWidget::spawnChoiceNode()
 {
-    currentTree->createChoiceNode();
+    auto mousePos = mapToScene(mapFromGlobal(QCursor::pos()));
+    currentTree->createChoiceNode(mousePos);
 }
 
 void GraphWidget::spawnChoiceOptionNode()
 {
-    currentTree->createChoiceOptionNode();
+    auto mousePos = mapToScene(mapFromGlobal(QCursor::pos()));
+    currentTree->createChoiceOptionNode(mousePos);
 }
 
 void GraphWidget::spawnDialogueNode()
 {
-    currentTree->createDialogueNode();
+    auto mousePos = mapToScene(mapFromGlobal(QCursor::pos()));
+    currentTree->createDialogueNode(mousePos);
 }
 
 void GraphWidget::processAddNode(Node* node)
