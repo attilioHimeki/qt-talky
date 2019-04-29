@@ -26,6 +26,7 @@ public:
     QList<NodeLink*> getLinkedNodes() const;
     void addLinkedNode(int linkedNodeId);
     void removeLinkedNode(int linkedNodeId);
+    bool isLinkedWith(int linkedNodeId) const;
     virtual bool validateAddNode(const Node& linkedNode) const;
 
     const QPointF getCurrentGraphPosition() const;

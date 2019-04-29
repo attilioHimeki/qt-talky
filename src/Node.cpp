@@ -47,6 +47,11 @@ void Node::removeLinkedNode(int linkedNodeId)
     model->removeLinkedNode(linkedNodeId);
 }
 
+bool Node::isLinkedWith(int linkedNodeId) const
+{
+    return model->isLinkedWith(linkedNodeId);
+}
+
 int Node::getNodeId() const
 {
     return model->getNodeId();

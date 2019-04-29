@@ -135,6 +135,14 @@ Node* DialogueTree::createChoiceOptionNode(QPointF pos)
 
 void DialogueTree::deleteNode(Node* node)
 {
+    for(auto n : nodes)
+    {
+        if(n->isLinkedWith(node->getNodeId()))
+        {
+            n->removeLinkedNode(node->getNodeId());
+        }
+    }
+
     nodes.removeOne(node);
 
     node->disconnect();

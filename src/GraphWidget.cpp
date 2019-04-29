@@ -8,9 +8,9 @@
 
 #include <math.h>
 #include <typeinfo>
-
 #include <QKeyEvent>
 #include <QMessageBox>
+#include <QDebug>
 
 GraphWidget::GraphWidget(QWidget *parent)
     : QGraphicsView(parent)
@@ -166,6 +166,10 @@ void GraphWidget::applyLoadedTreeJsonFile(QJsonObject& treeFileJson)
             {
                 auto nodeLinkView = new NodeLinkView(this, *n->getView(), *linkedNode->getView());
                 nodeLinks.push_back(nodeLinkView);
+            }
+            else
+            {
+                qWarning() << "Invalid node link found in JSON - Destination node not found - from" << n->getNodeId() << " to " << l->getLinkedNodeId();
             }
         }
     }
