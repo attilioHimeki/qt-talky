@@ -16,7 +16,7 @@ public:
     GraphWidget(QWidget *parent = Q_NULLPTR);
 
     void itemMoved();
-    void applyLoadedTreeJsonFile(QJsonObject& treeFileJson);
+    void applyLoadedTreeJsonFile(const QJsonObject& treeFileJson);
     void applyNewTree();
     const QJsonObject serialiseLoadedTree();
     void processAddNode(Node* node);

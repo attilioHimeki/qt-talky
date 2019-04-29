@@ -1,5 +1,6 @@
 #include "EditorWindow.h"
 #include "GraphWidget.h"
+#include "JsonEditorWidget.h"
 
 #include <QAction>
 #include <QMenuBar>
@@ -19,13 +20,17 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
 
     setMinimumSize(500, 500);
 
+    centralWidget = new QSplitter(Qt::Horizontal, this);
     graphWidget = new GraphWidget(this);
+    jsonEditorWidget = new JsonEditorWidget(this);
+    centralWidget->addWidget(graphWidget);
+    centralWidget->addWidget(jsonEditorWidget);
 
     connect(graphWidget, &GraphWidget::contentChanged, this, &EditorWindow::markFileDirty);
 
     hasUnsavedChanges = false;
 
-    setCentralWidget(graphWidget);
+    setCentralWidget(centralWidget);
 
     loadEditorSettings();
 
@@ -146,6 +151,7 @@ bool EditorWindow::loadFile()
         QJsonObject jsonObject = loadDoc.object();
 
         graphWidget->applyLoadedTreeJsonFile(jsonObject);
+        jsonEditorWidget->applyLoadedTreeJsonFile(jsonObject);
 
         currentLoadFile.close();
 
@@ -175,6 +181,9 @@ bool EditorWindow::saveFile()
     currentLoadFile.close();
 
     markFileNonDirty();
+
+    QJsonObject jsonObject = saveDoc.object();
+    jsonEditorWidget->applyLoadedTreeJsonFile(jsonObject);
 
     return true;
 }

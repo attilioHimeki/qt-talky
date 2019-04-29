@@ -2,10 +2,12 @@
 #define EDITORWINDOW_H
 
 #include "GraphWidget.h"
+#include "JsonEditorWidget.h"
 #include "SettingsDialog.h"
 
 #include <QMainWindow>
 #include <QTranslator>
+#include <QSplitter>
 
 class EditorWindow : public QMainWindow
 {
@@ -34,7 +36,10 @@ private:
     QMenu *editMenu;
     QMenu *aboutMenu;
 
+    QSplitter* centralWidget;
     GraphWidget* graphWidget;
+    JsonEditorWidget* jsonEditorWidget;
+
     QString currentOpenedFilePath;
     bool hasUnsavedChanges;
 

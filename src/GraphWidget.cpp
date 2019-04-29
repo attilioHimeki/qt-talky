@@ -142,7 +142,7 @@ void GraphWidget::applyNewTree()
 }
 
 
-void GraphWidget::applyLoadedTreeJsonFile(QJsonObject& treeFileJson)
+void GraphWidget::applyLoadedTreeJsonFile(const QJsonObject& treeFileJson)
 {
     clearAddTransition();
     currentTree->read(treeFileJson);
