@@ -34,7 +34,6 @@ HEADERS += \
     src/DialogueTree.h \
     src/DialogueNodeView.h \
     src/NodeLinkView.h \
-    src/DialogueNodeData.h \
     src/DialogueNode.h \
     src/OriginNode.h \
     src/NodeBuilder.h \
@@ -57,7 +56,6 @@ SOURCES += \
     src/DialogueTree.cpp \
     src/NodeLink.cpp \
     src/DialogueNodeView.cpp \
-    src/DialogueNodeData.cpp \
     src/NodeLinkCondition.cpp \
     src/DialogueNode.cpp \
     src/OriginNode.cpp \

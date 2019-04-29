@@ -3,6 +3,7 @@
 
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QVariantMap>
 
 #include "NodeLink.h"
 #include "NodeView.h"
@@ -23,6 +24,10 @@ public:
     void removeLinkedNode(int linkedNodeId);
     bool isLinkedWith(int nodeId) const;
 
+    QVariant getCustomParameter(QString key) const;
+    void setCustomParameter(QString key, QVariant val);
+    bool hasCustomParameter(QString key) const;
+
     QPointF getSerialisedGraphPosition() const;
     void refreshSerialisedGraphPosition(QPointF pos);
 
@@ -32,6 +37,8 @@ public:
 protected:
     int nodeId;
     QPointF serialisedGraphPosition;
+
+    QVariantMap customParameters;
 };
 
 #endif // NODEDATA_H

@@ -6,7 +6,7 @@
 class DialogueNode : public Node
 {
 public:
-    DialogueNode(DialogueNodeData* data);
+    DialogueNode(NodeData* data);
     ~DialogueNode() override = default;
 
     void setupView(GraphWidget *graphWidget) override;
@@ -15,6 +15,9 @@ public:
 
 public slots:
     void onNodeTextKeyChanged(const QString& key);
+
+private:
+    static const QString DIALOGUE_KEY_PARAM;
 };
 
 #endif // DIALOGUENODE_H

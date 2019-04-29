@@ -1,7 +1,8 @@
 #include "DialogueNode.h"
 
+const QString DialogueNode::DIALOGUE_KEY_PARAM = "dialogueKey";
 
-DialogueNode::DialogueNode(DialogueNodeData* data)
+DialogueNode::DialogueNode(NodeData* data)
     : Node(data)
 {
 }
@@ -11,9 +12,7 @@ void DialogueNode::setupView(GraphWidget *graphWidget)
     DialogueNodeView* dialogueView = new DialogueNodeView(this, graphWidget);
     view = std::unique_ptr<DialogueNodeView>(dialogueView);
 
-    DialogueNodeData* dialogueData = dynamic_cast<DialogueNodeData*>(model.get());
-
-    dialogueView->setKeyText(dialogueData->getNodeTextKey());
+    dialogueView->setKeyText(model->getCustomParameter(DIALOGUE_KEY_PARAM).toString());
 
     QObject::connect(dialogueView->keyTextField, &QLineEdit::textChanged, this, &DialogueNode::onNodeTextKeyChanged);
 
@@ -22,8 +21,7 @@ void DialogueNode::setupView(GraphWidget *graphWidget)
 
 void DialogueNode::onNodeTextKeyChanged(const QString& key)
 {
-    DialogueNodeData* dialogueData = dynamic_cast<DialogueNodeData*>(model.get());
-    dialogueData->setNodeTextKey(key);
+    model->setCustomParameter(DIALOGUE_KEY_PARAM, key);
 
     emit nodeChanged();
 }

@@ -25,6 +25,9 @@ void NodeData::write(QJsonObject &json) const
 
     json["x"] = serialisedGraphPosition.x();
     json["y"] = serialisedGraphPosition.y();
+
+    QJsonObject customParams = QJsonObject::fromVariantMap(customParameters);
+    json["customParams"] = customParams;
 }
 
 void NodeData::read(const QJsonObject &json, bool readId)
@@ -60,6 +63,12 @@ void NodeData::read(const QJsonObject &json, bool readId)
         }
     }
 
+    if(json.contains("customParams"))
+    {
+        auto customParams = json["customParams"].toObject();
+        customParameters = customParams.toVariantMap();
+    }
+
 }
 
 void NodeData::addLinkedNode(int linkedNodeId)
@@ -90,6 +99,21 @@ bool NodeData::isLinkedWith(int nodeId) const
         }
     }
     return false;
+}
+
+QVariant NodeData::getCustomParameter(QString key) const
+{
+    return customParameters.value(key);
+}
+
+void NodeData::setCustomParameter(QString key, QVariant val)
+{
+    customParameters.insert(key, val);
+}
+
+bool NodeData::hasCustomParameter(QString key) const
+{
+    return customParameters.contains(key);
 }
 
 QPointF NodeData::getSerialisedGraphPosition() const

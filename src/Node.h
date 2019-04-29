@@ -1,7 +1,6 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "DialogueNodeData.h"
 #include "NodeData.h"
 #include "NodeView.h"
 #include "DialogueNodeView.h"
