@@ -151,7 +151,7 @@ bool EditorWindow::loadFile()
         QJsonObject jsonObject = loadDoc.object();
 
         graphWidget->applyLoadedTreeJsonFile(jsonObject);
-        jsonEditorWidget->applyLoadedTreeJsonFile(jsonObject);
+        jsonEditorWidget->refresh(loadDoc);
 
         currentLoadFile.close();
 
@@ -183,7 +183,7 @@ bool EditorWindow::saveFile()
     markFileNonDirty();
 
     QJsonObject jsonObject = saveDoc.object();
-    jsonEditorWidget->applyLoadedTreeJsonFile(jsonObject);
+    jsonEditorWidget->refresh(saveDoc);
 
     return true;
 }

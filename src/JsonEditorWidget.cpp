@@ -1,7 +1,5 @@
 #include "JsonEditorWidget.h"
 
-#include <QDebug>
-#include <QJsonObject>
 #include <QJsonDocument>
 
 JsonEditorWidget::JsonEditorWidget(QWidget *parent)
@@ -10,9 +8,8 @@ JsonEditorWidget::JsonEditorWidget(QWidget *parent)
     setReadOnly(true);
 }
 
-void JsonEditorWidget::applyLoadedTreeJsonFile(const QJsonObject& treeFileJson)
+void JsonEditorWidget::refresh(const QJsonDocument& treeFileJson)
 {
-    QJsonDocument doc(treeFileJson);
-    QString strJson(doc.toJson(QJsonDocument::Indented));
+    QString strJson(treeFileJson.toJson(QJsonDocument::Indented));
     setPlainText(strJson);
 }

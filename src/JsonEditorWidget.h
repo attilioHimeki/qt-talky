@@ -8,7 +8,7 @@ class JsonEditorWidget : public QPlainTextEdit
 public:
     JsonEditorWidget(QWidget *parent = Q_NULLPTR);
 
-    void applyLoadedTreeJsonFile(const QJsonObject& treeFileJson);
+    void refresh(const QJsonDocument& treeFileJson);
 
 };
 
