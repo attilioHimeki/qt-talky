@@ -27,6 +27,7 @@ private:
     void setupToolBar();
     void setupMenuBar();
     void setupSettingsDialog();
+    void setupTimers();
 
     void loadEditorSettings();
     void saveEditorSettings();
@@ -48,12 +49,15 @@ private:
     QTranslator translator;
     QString currentLanguageCode;
 
+    QTimer* autosaveTimer;
+
 private slots:
     bool newFile();
     bool loadFile();
     bool saveFile();
     bool saveFileAsNew();
     bool maybeSave();
+    void autosave();
     void aboutTalky();
     void openSettings();
 
@@ -61,6 +65,7 @@ public slots:
     void markFileDirty();
     void markFileNonDirty();
     void changeLanguage(const QString& languageCode);
+    void setupAutosave(bool enabled, int intervalMinutes);
 
 signals:
     void appLanguageChanged(const QString& langCode);

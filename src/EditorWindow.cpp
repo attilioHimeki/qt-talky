@@ -11,8 +11,10 @@
 #include <QMessageBox>
 #include <QJsonDocument>
 #include <QSettings>
+#include <QTimer>
 
 #include <QDebug>
+
 
 EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags)
 {
@@ -32,6 +34,8 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
 
     setCentralWidget(centralWidget);
 
+    setupTimers();
+
     loadEditorSettings();
 
     setupToolBar();
@@ -41,6 +45,12 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
     statusBar()->showMessage(tr("Status Bar"));
 
     setWindowTitle(QCoreApplication::applicationName());
+}
+
+void EditorWindow::setupTimers()
+{
+    autosaveTimer = new QTimer(this);
+    connect(autosaveTimer, &QTimer::timeout, this, &EditorWindow::autosave);
 }
 
 void EditorWindow::setupToolBar()
@@ -87,7 +97,21 @@ void EditorWindow::setupSettingsDialog()
 {
     settingsDialog = new SettingsDialog(this);
     connect(settingsDialog, &SettingsDialog::languageChanged, this, &EditorWindow::changeLanguage);
+    connect(settingsDialog, &SettingsDialog::enableAutosaveChanged, this, &EditorWindow::setupAutosave);
     connect(this, &EditorWindow::appLanguageChanged, settingsDialog, &SettingsDialog::retranslate);
+}
+
+void EditorWindow::setupAutosave(bool enabled, int intervalMinutes)
+{
+    if(enabled)
+    {
+        auto ms = intervalMinutes * 60 * 1000;
+        autosaveTimer->start(ms);
+    }
+    else
+    {
+        autosaveTimer->stop();
+    }
 }
 
 bool EditorWindow::newFile()
@@ -161,6 +185,14 @@ bool EditorWindow::loadFile()
     }
 
     return false;
+}
+
+void EditorWindow::autosave()
+{
+    if(hasOpenedSaveFile() && hasUnsavedChanges)
+    {
+        saveFile();
+    }
 }
 
 bool EditorWindow::saveFile()
@@ -271,6 +303,13 @@ void EditorWindow::loadEditorSettings()
 
     QString lang = settings.value("lang", defaultLanguage).toString();
     changeLanguage(lang);
+
+    bool autosaveEnabled = settings.value("autosave", false).toBool();
+    if(autosaveEnabled)
+    {
+        int autosaveInterval = settings.value("autosaveInterval", 10).toInt();
+        setupAutosave(autosaveEnabled, autosaveInterval);
+    }
 }
 
 void EditorWindow::saveEditorSettings()

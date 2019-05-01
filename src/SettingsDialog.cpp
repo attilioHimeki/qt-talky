@@ -12,6 +12,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
 
     generalTab = new SettingsGeneralTab(this);
     tabWidget->addTab(generalTab, tr("General"));
+    connect(generalTab, &SettingsGeneralTab::enableAutosaveChanged, this, &SettingsDialog::enableAutosaveChanged);
 
     languagesTab = new SettingsLanguageTab(this);
     tabWidget->addTab(languagesTab, tr("Language"));

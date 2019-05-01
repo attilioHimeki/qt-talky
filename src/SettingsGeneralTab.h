@@ -17,8 +17,17 @@ private:
     QLabel* autosaveIntervalLabel;
     QLineEdit* autosaveIntervalField;
 
+    void refreshAutosave();
+
+private slots:
+    void onEnableAutosaveToggled(bool checked);
+    void onAutosaveIntervalChanged(const QString& key);
+
 public slots:
     void retranslate();
+
+signals:
+    void enableAutosaveChanged(bool enabled, int intervalMinutes);
 };
 
 #endif // SETTINGSGENERALTAB_H

@@ -26,6 +26,7 @@ public slots:
 
 signals:
     void languageChanged(const QString& langCode);
+    void enableAutosaveChanged(bool enabled, int intervalMinutes);
 };
 
 #endif // SETTINGSDIALOG_H
