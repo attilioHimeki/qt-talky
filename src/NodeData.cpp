@@ -52,6 +52,7 @@ void NodeData::read(const QJsonObject &json, bool readId)
     QPointF pos(startX, startY);
     serialisedGraphPosition = pos;
 
+    qDeleteAll(linkedNodes);
     linkedNodes.clear();
 
     if(json.contains("links") && json["links"].isArray())
