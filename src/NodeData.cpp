@@ -5,6 +5,12 @@ NodeData::NodeData(NodeType t, int id)
 {
 }
 
+NodeData::~NodeData()
+{
+    qDeleteAll(linkedNodes);
+    linkedNodes.clear();
+}
+
 int NodeData::getNodeId() const
 {
     return nodeId;

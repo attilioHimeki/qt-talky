@@ -6,17 +6,16 @@
 #include <QVariantMap>
 
 #include "NodeLink.h"
-#include "NodeView.h"
 #include "NodeType.h"
 
 class NodeData
 {
 public:
     NodeData(NodeType t, int id);
-    virtual ~NodeData() = default;
+    ~NodeData();
 
-    virtual void read(const QJsonObject &json, bool readId = false);
-    virtual void write(QJsonObject &json) const;
+    void read(const QJsonObject &json, bool readId = false);
+    void write(QJsonObject &json) const;
 
     int getNodeId() const;
 
