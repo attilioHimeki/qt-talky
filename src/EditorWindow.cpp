@@ -197,27 +197,31 @@ void EditorWindow::autosave()
 
 bool EditorWindow::saveFile()
 {
-    auto data = graphWidget->serialiseLoadedTree();
+    if(hasOpenedSaveFile())
+    {
+        auto data = graphWidget->serialiseLoadedTree();
 
-    QFile currentLoadFile(currentOpenedFilePath);
+        QFile currentLoadFile(currentOpenedFilePath);
 
-    if (!currentLoadFile.open(QIODevice::WriteOnly)) {
-        qWarning("Couldn't open save file.");
-        return false;
+        if (!currentLoadFile.open(QIODevice::WriteOnly)) {
+            qWarning("Couldn't open save file.");
+            return false;
+        }
+
+        QJsonDocument saveDoc(data);
+        currentLoadFile.write(saveDoc.toJson());
+
+        currentLoadFile.flush();
+        currentLoadFile.close();
+
+        markFileNonDirty();
+
+        QJsonObject jsonObject = saveDoc.object();
+        jsonEditorWidget->refresh(saveDoc);
+
+        return true;
     }
-
-    QJsonDocument saveDoc(data);
-    currentLoadFile.write(saveDoc.toJson());
-
-    currentLoadFile.flush();
-    currentLoadFile.close();
-
-    markFileNonDirty();
-
-    QJsonObject jsonObject = saveDoc.object();
-    jsonEditorWidget->refresh(saveDoc);
-
-    return true;
+    return false;
 }
 
 bool EditorWindow::saveFileAsNew()
