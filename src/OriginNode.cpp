@@ -11,9 +11,3 @@ void OriginNode::setupView(GraphWidget *graphWidget)
 
     Node::setupView(graphWidget);
 }
-
-bool OriginNode::validateAddNode(const Node& linkedNode) const
-{
-    auto linksAmount = model->linkedNodes.count();
-    return linksAmount < 1;
-}

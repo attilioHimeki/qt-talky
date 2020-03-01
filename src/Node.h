@@ -27,7 +27,7 @@ public:
     void addLinkedNode(int linkedNodeId);
     void removeLinkedNode(int linkedNodeId);
     bool isLinkedWith(int linkedNodeId) const;
-    virtual bool validateAddNode(const Node& linkedNode) const;
+    int getLinkedNodesCount() const;
 
     const QPointF getCurrentGraphPosition() const;
     const QPointF getSerialisedGraphPosition() const;

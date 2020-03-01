@@ -67,6 +67,8 @@ private:
     void initialiseTransitionIndicator();
     void startAddTransition(Node* fromNode);
     void clearAddTransition();
+
+    void handleAddNodeLinkFailure(NodeLinkResponse response);
 };
 
 

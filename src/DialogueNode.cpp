@@ -25,9 +25,3 @@ void DialogueNode::onNodeTextKeyChanged(const QString& key)
 
     emit nodeChanged();
 }
-
-bool DialogueNode::validateAddNode(const Node& linkedNode) const
-{
-    auto linksAmount = model->linkedNodes.count();
-    return linksAmount < 1 && Node::validateAddNode(linkedNode);
-}

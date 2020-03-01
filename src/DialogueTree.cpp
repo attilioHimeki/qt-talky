@@ -8,6 +8,11 @@ DialogueTree::DialogueTree()
     allowedConnectionsScheme.insert(NodeType::Dialogue, NodeType::Choice);
     allowedConnectionsScheme.insert(NodeType::Choice, NodeType::ChoiceOption);
     allowedConnectionsScheme.insert(NodeType::ChoiceOption, NodeType::Dialogue);
+
+    maximumLinkPerNodeType.insert(NodeType::Origin, 1);
+    maximumLinkPerNodeType.insert(NodeType::Dialogue, 1);
+    maximumLinkPerNodeType.insert(NodeType::Choice, std::numeric_limits<int>::max());
+    maximumLinkPerNodeType.insert(NodeType::ChoiceOption, 1);
 }
 
 Node* DialogueTree::createNode(NodeType type, QPointF pos)
@@ -55,25 +60,44 @@ Node* DialogueTree::getNodeById(int nodeId) const
     return Q_NULLPTR;
 }
 
-bool DialogueTree::addNodeLink(Node* startNode, Node* endNode)
+NodeLinkResponse DialogueTree::addNodeLink(Node* startNode, Node* endNode)
 {
-    if(isNodeLinkLegal(startNode->getNodeType(), endNode->getNodeType()) &&
-        startNode->validateAddNode(*endNode))
+    if(startNode == endNode)
+    {
+        return NodeLinkResponse::FailLinkItself;
+    }
+    else if(startNode->isLinkedWith(endNode->getNodeId()))
+    {
+        return NodeLinkResponse::FailAlreadyLinked;
+    }
+    else if(!isNodeLinkLegal(startNode->getNodeType(), endNode->getNodeType()))
+    {
+        return NodeLinkResponse::FailIncompatibleType;
+    }
+    else if(!canAddMoreLinksToNode(startNode))
+    {
+        return NodeLinkResponse::FailTooManyLinks;
+    }
+    else
     {
         startNode->addLinkedNode(endNode->getNodeId());
 
         emit linkAdded(startNode, endNode);
         emit contentChanged();
 
-        return true;
+        return NodeLinkResponse::Success;
     }
-    return false;
 }
 
 bool DialogueTree::isNodeLinkLegal(const NodeType startNodeType, const NodeType endNodeType) const
 {
     return allowedConnectionsScheme.contains(startNodeType, endNodeType) ||
             allowedConnectionsScheme.contains(startNodeType, NodeType::Any);
+}
+
+bool DialogueTree::canAddMoreLinksToNode(const Node* node) const
+{
+    return node->getLinkedNodesCount() < maximumLinkPerNodeType.value(node->getNodeType());
 }
 
 void DialogueTree::write(QJsonObject &json) const

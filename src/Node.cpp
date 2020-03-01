@@ -52,6 +52,11 @@ bool Node::isLinkedWith(int linkedNodeId) const
     return model->isLinkedWith(linkedNodeId);
 }
 
+int Node::getLinkedNodesCount() const
+{
+    return model->linkedNodes.count();
+}
+
 int Node::getNodeId() const
 {
     return model->getNodeId();
@@ -70,9 +75,4 @@ const QPointF Node::getCurrentGraphPosition() const
 const QPointF Node::getSerialisedGraphPosition() const
 {
     return model->getSerialisedGraphPosition();
-}
-
-bool Node::validateAddNode(const Node& linkedNode) const
-{
-    return !model->isLinkedWith(linkedNode.getNodeId());
 }

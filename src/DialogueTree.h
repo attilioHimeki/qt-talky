@@ -8,6 +8,7 @@
 
 #include <QJsonObject>
 
+enum class NodeLinkResponse {Success, FailAlreadyLinked, FailIncompatibleType, FailTooManyLinks, FailLinkItself};
 
 class DialogueTree : public QObject
 {
@@ -25,11 +26,13 @@ public:
     Node* createNode(NodeType type, QPointF pos = {});
     Node* cloneNode(const Node& node);
 
-    bool addNodeLink(Node* startNode, Node* endNode);
-    bool isNodeLinkLegal(const NodeType startNodeType, const NodeType endNodeType) const;
+    NodeLinkResponse addNodeLink(Node* startNode, Node* endNode);
     void deleteNode(Node* node);
     void clearTree();
     QList<Node*> nodes;
+
+    bool isNodeLinkLegal(const NodeType startNodeType, const NodeType endNodeType) const;
+    bool canAddMoreLinksToNode(const Node* node) const;
 
 signals:
     void contentChanged();
@@ -43,6 +46,7 @@ private:
     int nextNodeId;
 
     QMultiMap<NodeType, NodeType> allowedConnectionsScheme;
+    QMap<NodeType, int> maximumLinkPerNodeType;
 };
 
 #endif // DIALOGUETREE_H

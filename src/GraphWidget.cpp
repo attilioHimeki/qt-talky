@@ -95,7 +95,14 @@ void GraphWidget::onNodeCloneRequest(Node* node)
 
 void GraphWidget::onNodeAddTransitionRequest(Node* node)
 {
-    startAddTransition(node);
+    if(currentTree->canAddMoreLinksToNode(node))
+    {
+        startAddTransition(node);
+    }
+    else
+    {
+        handleAddNodeLinkFailure(NodeLinkResponse::FailTooManyLinks);
+    }
 }
 
 void GraphWidget::startAddTransition(Node* fromNode)
@@ -287,6 +294,27 @@ void GraphWidget::showContextMenu(const QPoint& pos)
      showDefaultContextMenu(pos);
 }
 
+void GraphWidget::handleAddNodeLinkFailure(NodeLinkResponse response)
+{
+    switch (response)
+    {
+        case NodeLinkResponse::FailLinkItself:
+            QMessageBox::warning(this, tr("Error linking nodes"), tr("You cannot link a node to itself"));
+            break;
+        case NodeLinkResponse::FailTooManyLinks:
+            QMessageBox::warning(this, tr("Error linking nodes"), tr("This node already has too many links"));
+            break;
+        case NodeLinkResponse::FailIncompatibleType:
+            QMessageBox::warning(this, tr("Error linking nodes"), tr("This link is not allowed"));
+            break;
+        case NodeLinkResponse::FailAlreadyLinked:
+            QMessageBox::warning(this, tr("Error linking nodes"), tr("These nodes are already linked"));
+            break;
+        case NodeLinkResponse::Success:
+            break;
+    }
+}
+
 void GraphWidget::wheelEvent(QWheelEvent *event)
 {
     scaleView(pow((double)2, -event->delta() / 240.0));
@@ -336,10 +364,10 @@ void GraphWidget::mousePressEvent(QMouseEvent * event)
                auto nodeView = dynamic_cast<NodeView*>(item);
                if(nodeView != Q_NULLPTR)
                {
-                   bool success = currentTree->addNodeLink(currentTransitionNode, nodeView->getOwner());
-                   if(!success)
+                   auto result = currentTree->addNodeLink(currentTransitionNode, nodeView->getOwner());
+                   if(result != NodeLinkResponse::Success)
                    {
-                       QMessageBox::warning(this, tr("Error linking nodes"), tr("This link is not allowed"));
+                       handleAddNodeLinkFailure(result);
                    }
 
                    break;
