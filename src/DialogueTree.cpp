@@ -23,14 +23,7 @@ Node* DialogueTree::createNode(NodeType type, QPointF pos)
     emit nodeAdded(node);
     emit contentChanged();
 
-    return originNode;
-}
-
-Node* DialogueTree::createOriginNode(QPointF pos)
-{
-    auto node = createNode(NodeType::Origin, pos);
-    originNode = node;
-    return originNode;
+    return node;
 }
 
 Node* DialogueTree::cloneNode(const Node &node)
@@ -140,21 +133,6 @@ void DialogueTree::read(const QJsonObject &json)
     }
 
     treeName = json.value("name").toString();
-}
-
-Node* DialogueTree::createDialogueNode(QPointF pos)
-{
-    return createNode(NodeType::Dialogue, pos);
-}
-
-Node* DialogueTree::createChoiceNode(QPointF pos)
-{
-    return createNode(NodeType::Choice, pos);
-}
-
-Node* DialogueTree::createChoiceOptionNode(QPointF pos)
-{
-    return createNode(NodeType::ChoiceOption, pos);
 }
 
 void DialogueTree::deleteNode(Node* node)

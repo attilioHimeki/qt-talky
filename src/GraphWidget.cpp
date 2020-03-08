@@ -34,7 +34,7 @@ GraphWidget::GraphWidget(QWidget *parent)
     currentTree = std::make_unique<DialogueTree>();
     connectTreeSignals();
 
-    currentTree->createOriginNode();
+    currentTree->createNode(NodeType::Origin);
 
     initialiseTransitionIndicator();
 }
@@ -145,7 +145,7 @@ void GraphWidget::applyNewTree()
     refreshGraph();
     connectTreeSignals();
 
-    currentTree->createOriginNode();
+    currentTree->createNode(NodeType::Origin);
 }
 
 
@@ -222,19 +222,19 @@ void GraphWidget::keyPressEvent(QKeyEvent *event)
 void GraphWidget::spawnChoiceNode()
 {
     auto mousePos = mapToScene(mapFromGlobal(QCursor::pos()));
-    currentTree->createChoiceNode(mousePos);
+    currentTree->createNode(NodeType::Choice, mousePos);
 }
 
 void GraphWidget::spawnChoiceOptionNode()
 {
     auto mousePos = mapToScene(mapFromGlobal(QCursor::pos()));
-    currentTree->createChoiceOptionNode(mousePos);
+    currentTree->createNode(NodeType::ChoiceOption, mousePos);
 }
 
 void GraphWidget::spawnDialogueNode()
 {
     auto mousePos = mapToScene(mapFromGlobal(QCursor::pos()));
-    currentTree->createDialogueNode(mousePos);
+    currentTree->createNode(NodeType::Dialogue, mousePos);
 }
 
 void GraphWidget::processAddNode(Node* node)
