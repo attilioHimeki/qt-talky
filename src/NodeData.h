@@ -23,7 +23,7 @@ public:
     void removeLinkedNode(int linkedNodeId);
     bool isLinkedWith(int nodeId) const;
 
-    QVariant getCustomParameter(QString key) const;
+    QVariant getCustomParameter(QString key, const QString def) const;
     void setCustomParameter(QString key, QVariant val);
     bool hasCustomParameter(QString key) const;
 

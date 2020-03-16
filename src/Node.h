@@ -3,7 +3,6 @@
 
 #include "NodeData.h"
 #include "NodeView.h"
-#include "DialogueNodeView.h"
 
 
 class Node : public QObject
@@ -20,7 +19,7 @@ public:
     int getNodeId() const;
     NodeType getNodeType() const;
 
-    virtual void setupView(GraphWidget *graphWidget) = 0;
+    virtual void setupView(GraphWidget *graphWidget);
     NodeView* getView();
 
     QList<NodeLink*> getLinkedNodes() const;

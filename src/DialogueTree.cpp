@@ -4,15 +4,19 @@ DialogueTree::DialogueTree()
     :nextNodeId(0)
 {
     allowedConnectionsScheme.insert(NodeType::Origin, NodeType::Dialogue);
+    allowedConnectionsScheme.insert(NodeType::Origin, NodeType::RandomLink);
     allowedConnectionsScheme.insert(NodeType::Dialogue, NodeType::Dialogue);
     allowedConnectionsScheme.insert(NodeType::Dialogue, NodeType::Choice);
     allowedConnectionsScheme.insert(NodeType::Choice, NodeType::ChoiceOption);
     allowedConnectionsScheme.insert(NodeType::ChoiceOption, NodeType::Dialogue);
+    allowedConnectionsScheme.insert(NodeType::RandomLink, NodeType::Dialogue);
+    allowedConnectionsScheme.insert(NodeType::RandomLink, NodeType::Choice);
 
     maximumLinkPerNodeType.insert(NodeType::Origin, 1);
     maximumLinkPerNodeType.insert(NodeType::Dialogue, 1);
     maximumLinkPerNodeType.insert(NodeType::Choice, std::numeric_limits<int>::max());
     maximumLinkPerNodeType.insert(NodeType::ChoiceOption, 1);
+    maximumLinkPerNodeType.insert(NodeType::RandomLink, std::numeric_limits<int>::max());
 }
 
 Node* DialogueTree::createNode(NodeType type, QPointF pos)

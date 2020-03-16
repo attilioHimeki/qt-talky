@@ -39,6 +39,14 @@ public:
 
     Node* getOwner() const;
 
+    void setupPropertyTextField(const QString id, const QString title, const QString fieldPlaceholder, const QPointF pos, const QString value = "");
+//    void setupPropertyTextFieldListener(const QString id, const std::function<void (Node::*)(const QString &)> f);
+
+    void setPropertyText(const QString id, const QString text);
+    const QLineEdit* getPropertyTextHandle(const QString id) const;
+
+    int getNodeHeight() const;
+
 signals:
     void onNodeDeletePressed(Node* owner);
     void onNodeClonePressed(Node* owner);
@@ -57,12 +65,15 @@ protected:
 
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
-    const int nodeWidth = 150;
-    const int nodeHeight = 50;
+    const int baseNodeWidth = 150;
+    const int baseNodeHeight = 30;
+
+    QMap<QString, QLineEdit*> textFields;
 
 private:
     QLabel* typeLabel;
     QLabel* idLabel;
+
 };
 
 

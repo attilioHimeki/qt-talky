@@ -111,65 +111,75 @@ Desideri salvare le modifiche?</translation>
 <context>
     <name>GraphWidget</name>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="261"/>
+        <location filename="../../src/GraphWidget.cpp" line="267"/>
         <source>New Node</source>
         <translation>Nuovo nodo</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="263"/>
+        <location filename="../../src/GraphWidget.cpp" line="269"/>
         <source>Dialogue Node</source>
         <translation>Nodo Dialogo</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="264"/>
+        <location filename="../../src/GraphWidget.cpp" line="270"/>
         <source>Create a new dialogue node</source>
         <translation>Crea un nuovo node Dialogo</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="266"/>
+        <location filename="../../src/GraphWidget.cpp" line="272"/>
         <source>Choice Node</source>
         <translation>Nodo Scelta</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="267"/>
+        <location filename="../../src/GraphWidget.cpp" line="273"/>
         <source>Create a new choice node</source>
         <translation>Crea un nuovo nodo Scelta</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="269"/>
+        <location filename="../../src/GraphWidget.cpp" line="275"/>
         <source>Choice Option Node</source>
         <translation>Nodo Opzione di Scelta</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="270"/>
+        <location filename="../../src/GraphWidget.cpp" line="276"/>
         <source>Create a new choice option node</source>
         <translation>Crea un nuovo nodo Opzione di Scelta</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="302"/>
-        <location filename="../../src/GraphWidget.cpp" line="305"/>
-        <location filename="../../src/GraphWidget.cpp" line="308"/>
+        <location filename="../../src/GraphWidget.cpp" line="278"/>
+        <source>Random Link Node</source>
+        <translation>Nodo Connessione Casuale</translation>
+    </message>
+    <message>
+        <location filename="../../src/GraphWidget.cpp" line="279"/>
+        <source>Create a new random link node</source>
+        <translation>Crea un nuovo nodo Connessione Casuale</translation>
+    </message>
+    <message>
         <location filename="../../src/GraphWidget.cpp" line="311"/>
+        <location filename="../../src/GraphWidget.cpp" line="314"/>
+        <location filename="../../src/GraphWidget.cpp" line="317"/>
+        <location filename="../../src/GraphWidget.cpp" line="320"/>
         <source>Error linking nodes</source>
         <translation>Errore nel connettere i nodi</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="302"/>
+        <location filename="../../src/GraphWidget.cpp" line="311"/>
         <source>You cannot link a node to itself</source>
         <translation>Non puoi legare un nodo a se stesso</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="305"/>
+        <location filename="../../src/GraphWidget.cpp" line="314"/>
         <source>This node already has too many links</source>
         <translation>Questo nodo ha già troppe connessioni</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="308"/>
+        <location filename="../../src/GraphWidget.cpp" line="317"/>
         <source>This link is not allowed</source>
         <translation>Questa connessione non é valida</translation>
     </message>
     <message>
-        <location filename="../../src/GraphWidget.cpp" line="311"/>
+        <location filename="../../src/GraphWidget.cpp" line="320"/>
         <source>These nodes are already linked</source>
         <translation>Questi nodi sono già collegati</translation>
     </message>
@@ -177,32 +187,32 @@ Desideri salvare le modifiche?</translation>
 <context>
     <name>NodeView</name>
     <message>
-        <location filename="../../src/NodeView.cpp" line="106"/>
+        <location filename="../../src/NodeView.cpp" line="163"/>
         <source>Delete</source>
         <translation>Rimuovi</translation>
     </message>
     <message>
-        <location filename="../../src/NodeView.cpp" line="107"/>
+        <location filename="../../src/NodeView.cpp" line="164"/>
         <source>Delete this node</source>
         <translation>Rimuovi questo nodo</translation>
     </message>
     <message>
-        <location filename="../../src/NodeView.cpp" line="109"/>
+        <location filename="../../src/NodeView.cpp" line="166"/>
         <source>Clone</source>
         <translation>Clona</translation>
     </message>
     <message>
-        <location filename="../../src/NodeView.cpp" line="110"/>
+        <location filename="../../src/NodeView.cpp" line="167"/>
         <source>Clone this node</source>
         <translation>Clona questo nodo</translation>
     </message>
     <message>
-        <location filename="../../src/NodeView.cpp" line="112"/>
+        <location filename="../../src/NodeView.cpp" line="169"/>
         <source>Add Transition</source>
         <translation>Aggiungi transizione</translation>
     </message>
     <message>
-        <location filename="../../src/NodeView.cpp" line="113"/>
+        <location filename="../../src/NodeView.cpp" line="170"/>
         <source>Create a new dialogue node</source>
         <translation>Crea un nuovo node Dialogo</translation>
     </message>
@@ -239,7 +249,7 @@ Desideri salvare le modifiche?</translation>
     <message>
         <location filename="../../src/SettingsGeneralTab.cpp" line="13"/>
         <source>Auto-save interval (minutes):</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervallo auto-salvataggio (minuti):</translation>
     </message>
     <message>
         <location filename="../../src/SettingsGeneralTab.cpp" line="38"/>

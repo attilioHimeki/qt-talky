@@ -10,6 +10,12 @@ public:
     ~ChoiceOptionNode() override = default;
 
     void setupView(GraphWidget *graphWidget) override;
+
+public slots:
+    void onOptionTextKeyChanged(const QString& key);
+
+private:
+    static const QString CHOICE_KEY_PARAM;
 };
 
 #endif // CHOICEOPTIONNODE_H

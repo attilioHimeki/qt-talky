@@ -26,6 +26,7 @@ public:
     void spawnDialogueNode();
     void spawnChoiceNode();
     void spawnChoiceOptionNode();
+    void spawnRandomLinkNode();
 
     void refreshGraph();
 

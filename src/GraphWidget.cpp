@@ -231,6 +231,12 @@ void GraphWidget::spawnChoiceOptionNode()
     currentTree->createNode(NodeType::ChoiceOption, mousePos);
 }
 
+void GraphWidget::spawnRandomLinkNode()
+{
+    auto mousePos = mapToScene(mapFromGlobal(QCursor::pos()));
+    currentTree->createNode(NodeType::RandomLink, mousePos);
+}
+
 void GraphWidget::spawnDialogueNode()
 {
     auto mousePos = mapToScene(mapFromGlobal(QCursor::pos()));
@@ -268,6 +274,9 @@ void GraphWidget::showDefaultContextMenu(const QPoint& pos)
 
     QAction* addChoiceOptionNodeAction = submenu->addAction(tr("Choice Option Node"), this, &GraphWidget::spawnChoiceOptionNode);
     addChoiceOptionNodeAction->setStatusTip(tr("Create a new choice option node"));
+
+    QAction* addRandomLinkNodeAction = submenu->addAction(tr("Random Link Node"), this, &GraphWidget::spawnRandomLinkNode);
+    addChoiceOptionNodeAction->setStatusTip(tr("Create a new random link node"));
 
     menu.exec(clickPos);
 

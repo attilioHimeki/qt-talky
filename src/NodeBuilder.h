@@ -3,8 +3,6 @@
 
 #include "Node.h"
 #include "DialogueNode.h"
-#include "OriginNode.h"
-#include "ChoiceNode.h"
 #include "ChoiceOptionNode.h"
 
 class NodeBuilder

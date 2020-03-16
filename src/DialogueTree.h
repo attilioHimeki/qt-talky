@@ -3,7 +3,6 @@
 
 #include "Node.h"
 #include "DialogueNode.h"
-#include "OriginNode.h"
 #include "NodeBuilder.h"
 
 #include <QJsonObject>

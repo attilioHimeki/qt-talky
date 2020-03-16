@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QPainter>
 #include <QLineEdit>
+#include <QLabel>
 #include <QGraphicsProxyWidget>
 
 NodeView::NodeView(Node* ownerNode, GraphWidget *graphWidget)
@@ -34,12 +35,12 @@ void NodeView::setupTypeLabel(NodeType type)
     typeLabel = new QLabel();
     auto typeText = getStringFromNodeType(type);
     typeLabel->setText(typeText);
-    typeLabel->setAlignment(Qt::AlignVCenter);
+    typeLabel->setAlignment(Qt::AlignLeft);
     typeLabel->setStyleSheet("font: 12pt;background: transparent;  border: 0px; color: #111111");
     typeLabel->show();
     QGraphicsProxyWidget* pMyProxy = new QGraphicsProxyWidget(this);
     pMyProxy->setWidget(typeLabel);
-    pMyProxy->setPos(-70, -40);
+    pMyProxy->setPos(baseNodeWidth - typeLabel->width(), -20);
 }
 
 void NodeView::setupIdLabel(int nodeId)
@@ -52,37 +53,94 @@ void NodeView::setupIdLabel(int nodeId)
     idLabel->show();
     QGraphicsProxyWidget* pMyProxy = new QGraphicsProxyWidget(this);
     pMyProxy->setWidget(idLabel);
-    pMyProxy->setPos(nodeWidth/3, -nodeHeight/2 - idLabel->height());
+    pMyProxy->setPos(0, -20);
+}
+
+void NodeView::setupPropertyTextField(const QString id, const QString title, const QString fieldPlaceholder, const QPointF pos, const QString value)
+{
+    auto titleTextField = new QLabel(title);
+    titleTextField->setAlignment(Qt::AlignLeft);
+    titleTextField->setStyleSheet("background:transparent; border: 2px; font-size: 10px; color: #990000");
+    titleTextField->show();
+    titleTextField->setFixedSize(baseNodeWidth - 20, 30);
+    QGraphicsProxyWidget* titleProxy = new QGraphicsProxyWidget(this);
+    titleProxy->setWidget(titleTextField);
+    titleProxy->setPos(pos.x(), pos.y());
+
+    QLineEdit* fieldTextField = new QLineEdit();
+    fieldTextField->setAlignment(Qt::AlignLeft);
+    fieldTextField->setFrame(true);
+    fieldTextField->setStyleSheet("background:transparent; border: 2px; color: #111111");
+    fieldTextField->setPlaceholderText(fieldPlaceholder);
+    fieldTextField->setText(value);
+    fieldTextField->show();
+    fieldTextField->setFixedSize(baseNodeWidth - 20, 30);
+    QGraphicsProxyWidget* fieldProxy = new QGraphicsProxyWidget(this);
+    fieldProxy->setWidget(fieldTextField);
+    fieldProxy->setPos(pos.x(), pos.y() + 10);
+
+    textFields.insert(id, fieldTextField);
+}
+
+void NodeView::setPropertyText(const QString id, const QString text)
+{
+    if(textFields.contains(id))
+    {
+        auto field = textFields.value(id);
+        field->setText(text);
+    }
+}
+
+const QLineEdit* NodeView::getPropertyTextHandle(const QString id) const
+{
+    if(textFields.contains(id))
+    {
+        return textFields.value(id);
+    }
+
+    return Q_NULLPTR;
 }
 
 QRectF NodeView::boundingRect() const
 {
-    return QRectF(-nodeWidth/2, -nodeHeight/2, nodeWidth, nodeHeight);
+    return QRectF(0, 0, baseNodeWidth, getNodeHeight());
 }
 
 QPainterPath NodeView::shape() const
 {
     QPainterPath path;
-    path.addRect(-nodeWidth/2, -nodeHeight/2, nodeWidth, nodeHeight);
+    path.addRect(0, 0, baseNodeWidth, getNodeHeight());
     return path;
 }
 
 QPointF NodeView::getEdgesInputPoint() const
 {
     auto nodePosition = pos();
-    return QPointF(nodePosition.x() - nodeWidth/2, nodePosition.y());
+    return QPointF(nodePosition.x(), nodePosition.y() + getNodeHeight()/2);
 }
 
 QPointF NodeView::getEdgesOutputPoint() const
 {
     auto nodePosition = pos();
-    return QPointF(nodePosition.x() + nodeWidth/2, nodePosition.y());
+    return QPointF(nodePosition.x() + baseNodeWidth, nodePosition.y() + getNodeHeight()/2);
+}
+
+int NodeView::getNodeHeight() const
+{
+    // Todo: Find a better way to calculate this
+    int totalHeight = baseNodeHeight;
+    for(auto field : textFields)
+    {
+        totalHeight += field->height();
+    }
+
+    return totalHeight;
 }
 
 void NodeView::paint(QPainter *painter, const QStyleOptionGraphicsItem* /*option*/, QWidget *)
 {
     painter->setPen(QPen(Qt::black, 1));
-    painter->drawRoundRect(-nodeWidth/2, -nodeHeight/2, nodeWidth, nodeHeight, 5, 5);
+    painter->drawRoundedRect(0, 0, baseNodeWidth, getNodeHeight(), 5, 5);
 }
 
 QVariant NodeView::itemChange(GraphicsItemChange change, const QVariant &value)

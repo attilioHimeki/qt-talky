@@ -108,9 +108,9 @@ bool NodeData::isLinkedWith(int nodeId) const
     return false;
 }
 
-QVariant NodeData::getCustomParameter(QString key) const
+QVariant NodeData::getCustomParameter(QString key, const QString defaultVal = "") const
 {
-    return customParameters.value(key);
+    return customParameters.value(key, defaultVal);
 }
 
 void NodeData::setCustomParameter(QString key, QVariant val)

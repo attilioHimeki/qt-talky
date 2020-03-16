@@ -8,21 +8,13 @@ Node* NodeBuilder::create(NodeType type, int id, QPointF pos)
         {
             return createGenericNode<DialogueNode>(type, id, pos);
         }
-        case NodeType::Origin:
-        {
-            return createGenericNode<OriginNode>(type, id, pos);
-        }
-        case NodeType::Choice:
-        {
-            return createGenericNode<ChoiceNode>(type, id, pos);
-        }
         case NodeType::ChoiceOption:
         {
             return createGenericNode<ChoiceOptionNode>(type, id, pos);
         }
         default:
         {
-            return createGenericNode<OriginNode>(type, id, pos);
+            return createGenericNode<Node>(type, id, pos);
         }
     }
 }
@@ -43,21 +35,13 @@ Node* NodeBuilder::create(QJsonObject json, int id)
         {
             return createGenericNode<DialogueNode>(json, id);
         }
-        case NodeType::Origin:
-        {
-            return createGenericNode<OriginNode>(json, id);
-        }
-        case NodeType::Choice:
-        {
-            return createGenericNode<ChoiceNode>(json, id);
-        }
         case NodeType::ChoiceOption:
         {
             return createGenericNode<ChoiceOptionNode>(json, id);
         }
         default:
         {
-            return createGenericNode<OriginNode>(json, id);
+            return createGenericNode<Node>(json, id);
         }
     }
 }

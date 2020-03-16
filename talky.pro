@@ -32,12 +32,9 @@ HEADERS += \
     src/GraphWidget.h \
     src/EditorWindow.h \
     src/DialogueTree.h \
-    src/DialogueNodeView.h \
     src/NodeLinkView.h \
     src/DialogueNode.h \
-    src/OriginNode.h \
     src/NodeBuilder.h \
-    src/ChoiceNode.h \
     src/SettingsDialog.h \
     src/SettingsGeneralTab.h \
     src/SettingsLanguageTab.h \
@@ -56,12 +53,9 @@ SOURCES += \
     src/EditorWindow.cpp \
     src/DialogueTree.cpp \
     src/NodeLink.cpp \
-    src/DialogueNodeView.cpp \
     src/NodeLinkCondition.cpp \
     src/DialogueNode.cpp \
-    src/OriginNode.cpp \
     src/NodeBuilder.cpp \
-    src/ChoiceNode.cpp \
     src/SettingsDialog.cpp \
     src/SettingsGeneralTab.cpp \
     src/SettingsLanguageTab.cpp \

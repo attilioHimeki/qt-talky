@@ -39,6 +39,10 @@ inline NodeType getNodeTypeFromString(const QString& typeString)
     {
         return NodeType::ChoiceOption;
     }
+    else if(typeString == "randomLink")
+    {
+        return NodeType::RandomLink;
+    }
 
     return NodeType::None;
 }
@@ -76,6 +80,10 @@ inline QString getStringFromNodeType(NodeType type)
     else if(type == NodeType::ChoiceOption)
     {
         return "choiceOption";
+    }
+    else if(type == NodeType::RandomLink)
+    {
+        return "randomLink";
     }
 
     return "none";

@@ -7,6 +7,8 @@ Node::Node(NodeData* data)
 
 void Node::setupView(GraphWidget *graphWidget)
 {
+     view = std::make_unique<NodeView>(this, graphWidget);
+
      auto startPos = model->getSerialisedGraphPosition();
      view->setPos(startPos);
 
