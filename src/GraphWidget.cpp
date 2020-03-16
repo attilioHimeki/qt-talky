@@ -276,7 +276,7 @@ void GraphWidget::showDefaultContextMenu(const QPoint& pos)
     addChoiceOptionNodeAction->setStatusTip(tr("Create a new choice option node"));
 
     QAction* addRandomLinkNodeAction = submenu->addAction(tr("Random Link Node"), this, &GraphWidget::spawnRandomLinkNode);
-    addChoiceOptionNodeAction->setStatusTip(tr("Create a new random link node"));
+    addRandomLinkNodeAction->setStatusTip(tr("Create a new random link node"));
 
     menu.exec(clickPos);
 
