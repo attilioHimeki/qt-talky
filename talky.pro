@@ -41,7 +41,8 @@ HEADERS += \
     src/MouseLinkView.h \
     src/LinkView.h \
     src/ChoiceOptionNode.h \
-    src/JsonEditorWidget.h
+    src/JsonEditorWidget.h \
+    src/CSVParser.h
 
 SOURCES += \
     src/main.cpp \
@@ -62,7 +63,8 @@ SOURCES += \
     src/MouseLinkView.cpp \
     src/LinkView.cpp \
     src/ChoiceOptionNode.cpp \
-    src/JsonEditorWidget.cpp
+    src/JsonEditorWidget.cpp \
+    src/CSVParser.cpp
 
 TRANSLATIONS += res/languages/talky_en.ts \
                 res/languages/talky_it.ts \
