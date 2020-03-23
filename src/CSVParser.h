@@ -2,12 +2,12 @@
 #define CSVPARSER_H
 
 #include <QString>
-#include <QMap>
+#include <QList>
 
 class CSVParser
 {
 public:
-    const QMap<int, QStringList>* parseCSVFile(QString csvText) const;
+    const QList<QStringList>* parseCSVFile(QString csvText) const;
 
 private:
     const QStringList splitCsvLine(QString line) const;

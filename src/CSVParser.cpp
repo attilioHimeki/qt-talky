@@ -1,16 +1,16 @@
 #include "CSVParser.h"
 
-const QMap<int, QStringList>* CSVParser::parseCSVFile(QString csvText) const
+const QList<QStringList>* CSVParser::parseCSVFile(QString csvText) const
 {
     const QStringList lines = csvText.split("\n");
     const int numLines = lines.length();
 
-    QMap<int, QStringList>* result = new QMap<int, QStringList>();
+    QList<QStringList>* result = new QList<QStringList>();
 
     for(int i = 0; i < numLines; i++)
     {
         QStringList row = splitCsvLine(lines[i]);
-        result->insert(i, row);
+        result->append(row);
     }
 
     return result;
