@@ -1,5 +1,5 @@
 # qt-talky
-Node-based dialogue editor built in Qt
+Node-based dialogue editor built in Qt and C++.
 
 This tool lets you define dialogues, choices and actions for your game or app in a visual way. 
 
