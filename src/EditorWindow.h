@@ -67,6 +67,8 @@ public slots:
     void changeLanguage(const QString& languageCode);
     void setupAutosave(bool enabled, int intervalMinutes);
 
+    void refreshJsonView();
+
 signals:
     void appLanguageChanged(const QString& langCode);
 };

@@ -18,8 +18,8 @@ void DialogueNode::setupView(GraphWidget *graphWidget)
                                  QPointF(10, 50), model->getCustomParameter(DIALOGUE_KEY_PARAM, "").toString());
 
 
-    QObject::connect(view->getPropertyTextHandle(DIALOGUE_KEY_PARAM), &QLineEdit::textChanged, this, &DialogueNode::onDialogueTextKeyChanged);
-    QObject::connect(view->getPropertyTextHandle(SPEAKER_KEY_PARAM), &QLineEdit::textChanged, this, &DialogueNode::onSpeakerTextKeyChanged);
+    QObject::connect(view->getPropertyTextHandle(DIALOGUE_KEY_PARAM), &QLineEdit::textEdited, this, &DialogueNode::onDialogueTextKeyChanged);
+    QObject::connect(view->getPropertyTextHandle(SPEAKER_KEY_PARAM), &QLineEdit::textEdited, this, &DialogueNode::onSpeakerTextKeyChanged);
 }
 
 void DialogueNode::onDialogueTextKeyChanged(const QString& key)

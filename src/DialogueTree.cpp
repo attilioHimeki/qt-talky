@@ -22,6 +22,7 @@ DialogueTree::DialogueTree()
 Node* DialogueTree::createNode(NodeType type, QPointF pos)
 {
     auto node = NodeBuilder::create(type, nextNodeId++, pos);
+    connect(node, &Node::nodeChanged, this, &DialogueTree::contentChanged);
     nodes.append(node);
 
     emit nodeAdded(node);
@@ -35,6 +36,7 @@ Node* DialogueTree::cloneNode(const Node &node)
     QJsonObject nodeObject;
     node.write(nodeObject);
     auto clone = NodeBuilder::create(nodeObject, nextNodeId++);
+    connect(clone, &Node::nodeChanged, this, &DialogueTree::contentChanged);
 
     nodes.append(clone);
 

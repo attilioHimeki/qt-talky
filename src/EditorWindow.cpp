@@ -29,6 +29,7 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
     centralWidget->addWidget(jsonEditorWidget);
 
     connect(graphWidget, &GraphWidget::contentChanged, this, &EditorWindow::markFileDirty);
+    connect(graphWidget, &GraphWidget::contentChanged, this, &EditorWindow::refreshJsonView);
 
     hasUnsavedChanges = false;
 
@@ -41,6 +42,7 @@ EditorWindow::EditorWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow
     setupToolBar();
     setupMenuBar();
     setupSettingsDialog();
+    refreshJsonView();
 
     statusBar()->showMessage(tr("Status Bar"));
 
@@ -340,6 +342,13 @@ void EditorWindow::markFileNonDirty()
 {
     hasUnsavedChanges = false;
     setWindowModified(false);
+}
+
+void EditorWindow::refreshJsonView()
+{
+    auto data = graphWidget->serialiseLoadedTree();
+    QJsonDocument saveDoc(data);
+    jsonEditorWidget->refresh(saveDoc);
 }
 
 void EditorWindow::aboutTalky()
