@@ -91,6 +91,7 @@ void NodeData::removeLinkedNode(int linkedNodeId)
         if(link->getLinkedNodeId() == linkedNodeId)
         {
             linkedNodes.removeOne(link);
+            delete link;
             break;
         }
     }
